@@ -18,15 +18,15 @@ def dashboard(request):
     return render(request, 'core/dashboard.html')
 
 @login_required
-def perfilCliente(request):
+def perfilCliente(request, id):
     return render(request, 'core/perfilCliente.html')
 
 @login_required
-def perfilVendedor(request):
+def perfilVendedor(request, id):
     return render(request, 'core/perfilVendedor.html')
 
 @login_required
-def perfilAdmin(request):
+def perfilAdmin(request, id):
     return render(request, 'core/perfilAdmin.html')
 
 @login_required
@@ -34,13 +34,13 @@ def cardapio(request):
     return render(request, 'core/cardapio.html')
 
 @login_required
-def produto(request):
+def produto(request, id):
     return render(request, 'core/produto.html')
 
 @login_required
-def carrinho(request):
+def carrinho(request, id):
     return render(request, 'core/carrinho.html')
 
 @login_required
-def pedido(request):
+def pedido(request, id):
     return render(request, 'core/pedido.html')

@@ -6,6 +6,7 @@ class Perfil(models.Model):
     TIPO_USUARIO = (
         ("CLIENTE", "Cliente"),
         ("VENDEDOR", "Vendedor"),
+        ("ADMINISTRADOR", "Admin"),
     )
 
     usuario = models.OneToOneField(
