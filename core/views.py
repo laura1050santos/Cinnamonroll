@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from .models import Produto,Pedido,Perfil,ItemCarrinho,ItemPedido,Carrinho
 
 def homepage(request):
     return render(request, 'core/homepage.html')
@@ -12,6 +13,14 @@ def login(request):
 
 def cadastro(request):
     return render(request, 'core/cadastro.html')
+
+def editar_produto(request,id):
+    produto = get_object_or_404(Produto,id=id)
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('core/produto.html')
 
 @login_required
 def dashboard(request):
