@@ -15,7 +15,7 @@ class Perfil(models.Model):
         related_name="perfil"
     )
 
-    tipo = models.CharField(max_length=10, choices=TIPO_USUARIO)
+    tipo = models.CharField(max_length=15, choices=TIPO_USUARIO)
 
     telefone = models.CharField(max_length=20, blank=True)
     endereco = models.CharField(max_length=255, blank=True)
