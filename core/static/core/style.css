@@ -4,6 +4,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
-h1 {
-    color: #00bfff;
+h3 {
+    color: #b2e7e7;
+}
+
+a {
+    color:rgb(202, 116, 128);
 }

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Sistema Django{% endblock %}</title>
+<link rel="stylesheet" href= "{% static 'core/style.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <h3>Cinnamaroll</h3>
+        <a href="/"> Cadastro </a> |
+        <a href="/sobre/"> Login</a> |
+        <a href="/curso/"> Carrinho </a>
+    </nav>
+        <hr>
+</header>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<footer> --- </footer>
+</html>
+
+

@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+{% block title %}Área de Login{% endblock %}
 
-    <h1>Login</h1>
-    <form action="#" method="POST">
-        <label for="email">E-mail:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+{% block content %}
+<h2>Login</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <label for="email">E-mail:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
 
-        <label for="senha">Senha:</label><br>
-        <input id="senha" name="senha"></input><br><br>
-
-        <button type="submit">Enviar</button>
-    </form>
-
-</body>
-</html>
+    <label for="senha">Senha:</label><br>
+    <input id="senha" name="senha"></input><br><br>
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}
