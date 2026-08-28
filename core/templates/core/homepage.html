@@ -1,9 +1,372 @@
-{% extends 'core/base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinnamonroll - O Delivery de Doces Mais Fofo do Mundo</title>
+    <!-- Google Fonts: Quicksand para um toque arredondado e fofo -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #a8dadc;
+            --light-blue: #fffed8;
+            --accent-pink: #f79ecf;
+            --soft-yellow: #fdfcdc;
+            --text-color: #457b9d;
+            --white: #ffffff;
+            --gray-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-blue);
+            color: var(--text-color);
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 4px 12px rgba(168, 218, 220, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area i {
+            font-size: 28px;
+            color: var(--accent-pink);
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .address-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gray-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .user-actions button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-cart {
+            background-color: var(--accent-pink) !important;
+            color: var(--white) !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Banner Principal (Estilo iFood mas com carinha de nuvem) */
+        .hero-banner {
+            background-color: rgb(250, 161, 205);
+            border-radius: 24px;
+            padding: 40px;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(255, 181, 167, 0.3);
+        }
+
+        .hero-text h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            background: var(--white);
+            color: var(--text-color);
+            padding: 10px 24px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Categorias (Filtros rápidos) */
+        .categories-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .category-card {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--soft-yellow);
+        }
+
+        .category-card i {
+            font-size: 28px;
+            color: var(--accent-pink);
+            margin-bottom: 8px;
+        }
+
+        .category-card span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Lojas / Confeitarias em Destaque */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .store-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .store-card:hover {
+            transform: scale(1.02);
+        }
+
+        .store-img {
+            width: 70px;
+            height: 70px;
+            background-color: var(--soft-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--accent-pink);
+            flex-shrink: 0;
+        }
+
+        .store-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .store-details {
+            font-size: 13px;
+            color: #777;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .store-details .rating {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        /* Rodapé Fofo */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            margin-top: 50px;
+            color: #888;
+            font-size: 14px;
+            border-top: 2px dashed var(--primary-blue);
+        }
+    </style>
+</head>
 <body>
-<h1>Sobre o projeto</h1>
-<p>Esta página apresenta informações sobre o sistema criado na aula de
-Django.</p>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="logo-area">
+            <i class="fa-solid fa-cloud"></i>
+            <h1>Cinnamonroll</h1>
+        </div>
+
+        <div class="address-bar">
+            <i class="fa-solid fa-location-dot" style="color: var(--accent-pink);"></i>
+            <span>Entregar em: <strong>Rua das Nuvens Fofas, 123</strong></span>
+            <i class="fa-solid fa-angle-down"></i>
+        </div>
+
+        <div class="user-actions">
+            <button><i class="fa-regular fa-user"></i> Entrar</button>
+            <button class="btn-cart"><i class="fa-solid fa-basket-shopping"></i> Sacola</button>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main>
+        <!-- Banner Principal -->
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h2>Fome de doçura? ☁️</h2>
+                <p>Peça os bolos, rolinhos de canela e sobremesas mais fofos da cidade direto na sua casa!</p>
+                <button class="hero-btn">Ver confeitarias</button>
+            </div>
+            <div class="hero-icon" style="font-size: 80px;">
+                🧁
+            </div>
+        </section>
+
+        <!-- Categorias Estilo iFood -->
+        <section class="categories-section">
+            <h3 class="section-title">O que você vai larica hoje?</h3>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fa-solid fa-cookie-bite"></i>
+                    <span>Cinnamon Rolls</span>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <span>Bolos no Pote</span>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-ice-cream"></i>
+                    <span>Gelados & Milkshakes</span>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-stroopwafel"></i>
+                    <span>Macarons</span>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Bebidas Quentes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lojas / Confeitarias -->
+        <section>
+            <h3 class="section-title">Confeitarias Fofas Próximas</h3>
+            <div class="stores-grid">
+                <!-- Loja 1 -->
+                <div class="store-card">
+                    <div class="store-img">🍥</div>
+                    <div class="store-info">
+                        <h3>Café do Cinnamoroll</h3>
+                        <div class="store-details">
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                            <span>• Confeitaria</span>
+                            <span>• 25-35 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loja 2 -->
+                <div class="store-card">
+                    <div class="store-img">🍓</div>
+                    <div class="store-info">
+                        <h3>Nuvem de Morango Doceria</h3>
+                        <div class="store-details">
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.8</span>
+                            <span>• Bolos & Tortas</span>
+                            <span>• 30-40 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loja 3 -->
+                <div class="store-card">
+                    <div class="store-img">🍫</div>
+                    <div class="store-info">
+                        <h3>Choco-Puff Confeitaria</h3>
+                        <div class="store-details">
+                            <span class="rating"><i class="fa-solid fa-star"></i> 5.0</span>
+                            <span>• Brigadeiros & Brownies</span>
+                            <span>• 15-25 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>&copy; 2026 Cinnamonroll Delivery de Doces. Inspirado na estética da Sanrio e na praticidade do iFood.</p>
+    </footer>
+
 </body>
-{% endblock %}
 </html>
