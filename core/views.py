@@ -42,12 +42,146 @@ def dashboard(request):
     return render(request, 'core/dashboard.html')
 
 @login_required
+def perfilCliente_listar(request):
+    perfis = Perfil.objects.filter(tipo="CLIENTE")
+
+    return render(request, 'core/perfilCliente_listar.html', {
+        'perfis': perfis
+    })
+
+
+@login_required
 def perfilCliente(request, id):
-    return render(request, 'core/perfilCliente.html')
+    perfil = get_object_or_404(
+        Perfil,
+        id=id,
+        tipo="CLIENTE"
+    )
+
+    return render(request, 'core/perfilCliente.html', {
+        'perfil': perfil
+    })
+
+
+@login_required
+def perfilCliente_criar(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.tipo = "CLIENTE"
+            perfil.save()
+
+            return redirect('perfilCliente_listar')
+    else:
+        form = PerfilForm()
+
+    return render(request, 'core/perfilCliente_form.html', {
+        'form': form
+    })
+
+@login_required
+def perfilCliente_editar(request, id):
+    perfil = get_object_or_404( Perfil,id=id,tipo="CLIENTE")
+    if request.method == 'POST':
+        form = PerfilForm(request.POST,request.FILES,instance=perfil)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.tipo = "CLIENTE"
+            perfil.save()
+            return redirect('perfilCliente', id=perfil.id)
+    else:
+        form = PerfilForm(instance=perfil)
+    return render(request, 'core/perfilCliente_form.html', {'form': form, 'perfil': perfil })
+
+
+@login_required
+def perfilCliente_excluir(request, id):
+    perfil = get_object_or_404(
+        Perfil,
+        id=id,
+        tipo="CLIENTE"
+    )
+    if request.method == 'POST':
+        perfil.delete()
+        return redirect('perfilCliente_listar')
+    return render(request, 'core/perfilCliente_confirmar_exclusao.html', {'perfil': perfil })
+
+
+# PERFIL VENDEDOR
+
+@login_required
+def perfilVendedor_listar(request):
+    perfis = Perfil.objects.filter(tipo="VENDEDOR")
+    return render(request, 'core/perfilVendedor_listar.html', {     'perfis': perfis})
 
 @login_required
 def perfilVendedor(request, id):
-    return render(request, 'core/perfilVendedor.html')
+    perfil = get_object_or_404(
+        Perfil,
+        id=id,
+        tipo="VENDEDOR"
+    )
+    return render(request, 'core/perfilVendedor.html', {'perfil': perfil})
+
+@login_required
+def perfilVendedor_criar(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.tipo = "VENDEDOR"
+            perfil.save()
+
+            return redirect('perfilVendedor_listar')
+    else:
+        form = PerfilForm()
+
+    return render(request, 'core/perfilVendedor_form.html', {'form': form })
+
+
+@login_required
+def perfilVendedor_editar(request, id):
+    perfil = get_object_or_404(
+        Perfil,
+        id=id,
+        tipo="VENDEDOR"
+    )
+
+    if request.method == 'POST':
+        form = PerfilForm(
+            request.POST,
+            request.FILES,
+            instance=perfil
+        )
+
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.tipo = "VENDEDOR"
+            perfil.save()
+
+            return redirect('perfilVendedor', id=perfil.id)
+    else:
+        form = PerfilForm(instance=perfil)
+
+    return render(request, 'core/perfilVendedor_form.html', {'form': form,'perfil': perfil})
+
+
+@login_required
+def perfilVendedor_excluir(request, id):
+    perfil = get_object_or_404(
+        Perfil,
+        id=id,
+        tipo="VENDEDOR"
+    )
+
+    if request.method == 'POST':
+        perfil.delete()
+        return redirect('perfilVendedor_listar')
+
+    return render(request, 'core/perfilVendedor_confirmar_exclusao.html', {'perfil': perfil})
 
 @login_required
 def perfilAdmin(request, id):
