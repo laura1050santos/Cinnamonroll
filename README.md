@@ -9,7 +9,7 @@ Rodar:
 - python3 -m venv venv
 - ls
 - - (deve aparecer config core manage.py venv)
-- source venv/bin/activate
+- source venv/bin/activate|
 - pip install django
 - python -m django --version
 - pip install Pillow
