@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Cadastro da Loja - Cinnamonroll{% endblock %}
+
+{% block content %}
+<section class="register-section">
+    <div class="register-container">
+        <h2><i class="fa-solid fa-shop"></i> Configurar sua Loja</h2>
+        <p>Falta pouco! Preencha os dados do seu estabelecimento para começar a vender.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="input-group">
+                <label for="nome_loja">Nome da Loja</label>
+                <input type="text" id="nome_loja" name="nome_loja" required>
+            </div>
+
+            <div class="input-group">
+                <label for="cnpj_cpf">CPF ou CNPJ</label>
+                <input type="text" id="cnpj_cpf" name="cnpj_cpf" required>
+            </div>
+
+            <div class="input-group">
+                <label for="telefone_loja">Telefone / WhatsApp Comercial</label>
+                <input type="tel" id="telefone_loja" name="telefone_loja" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Finalizar Cadastro da Loja</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -12,7 +12,28 @@ def login(request):
     return render(request, 'core/login.html')
 
 def cadastro(request):
+    if request.method == 'POST':
+        tipo_usuario = request.POST.get('tipo_usuario')
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
+
+        # Validações básicas e salvamento do usuário aqui...
+        
+        if tipo_usuario == 'vendedor':
+            return redirect('cadastro_loja')
+        else:
+            return redirect('homepage')
+
     return render(request, 'core/cadastro.html')
+
+def cadastro_loja(request):
+    if request.method == 'POST':
+        
+        return redirect('homepage')  
+
+    return render(request, 'core/cadastro_loja.html')
 
 def editar_produto(request,id):
     produto = get_object_or_404(Produto,id=id)

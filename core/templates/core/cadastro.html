@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Criar Conta - Cinnamonroll{% endblock %}
+
+{% block content %}
+<section class="register-section">
+    <div class="register-container">
+        <h2>Criar uma conta</h2>
+
+        {% if erro %}
+            <div class="alert-error" style="color: red; background: #ffe6e6; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        <form method="POST" id="register-form">
+            {% csrf_token %}
+            
+            <div class="user-type-group">
+                <label class="user-type-label">Pretende vender produtos?:</label>
+                <div class="user-type-options">
+                    <label class="radio-card">
+                        <input type="radio" name="tipo_usuario" value="cliente" checked>
+                        <div class="card-content">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Cliente</span>
+                        </div>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="tipo_usuario" value="vendedor">
+                        <div class="card-content">
+                            <i class="fa-solid fa-store"></i>
+                            <span>Vendedor</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmar_senha">Confirmar Senha</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Continuar</button>
+        </form>
+
+        <p class="login-redirect" style="text-align: center; margin-top: 15px;">
+            Já registrado? <a href="{% url 'login' %}">faça o login aqui</a>
+        </p>
+    </div>
+</section>
+
+<script>
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o envio padrão para tratarmos no backend/frontend
+        
+        const tipoUsuario = document.querySelector('input[name="tipo_usuario"]:checked').value;
+        
+        if (tipoUsuario === 'vendedor') {
+            this.action = "{% url 'cadastro_loja' %}"; // Nome da URL do cadastro de loja
+        } else {
+            this.action = "{% url 'homepage' %}"; // Nome da URL da página inicial
+        }
+        
+        this.submit(); // Envia o formulário para a rota definida
+    });
+</script>
+{% endblock %}
