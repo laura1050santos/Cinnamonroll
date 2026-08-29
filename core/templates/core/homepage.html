@@ -1,22 +1,33 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Cinnamonroll - O Delivery de Doces Mais Fofo do Mundo{% endblock %}
 
+{% block title %}Cinnamonroll - Delivery de Doces das Melhores Confeiteiras{% endblock %}
+{% load static %}
 {% block content %}
+<!-- Barra de Busca -->
+<div class="search-box">
+    <input type="text" placeholder="Buscar docerias, bolos ou confeiteiras...">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+
+<!-- Banner Principal de Boas-Vindas -->
 <section class="hero-section">
     <div class="hero-content">
-        <h2>Bem-vindo ao mundo doce do Cinnamonroll!</h2>
-        <p class="hero-subtitle">Escolha seus doces favoritos e receba em casa com toda a fofura e rapidez.</p>
-        <div class="search-box">
-            <input type="text" placeholder="Buscar doces, bolos, bebidas...">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        <h2>As melhores docerias perto de você! </h2>
+        <p class="hero-subtitle">Conectamos você às confeiteiras mais talentosas da cidade.</p>
     </div>
 </section>
 
+<!-- Categorias -->
 <section class="categories-section">
-    <h3>Categorias</h3>
+    <div class="section-header">
+        <h3 class="section-title">Categorias</h3>
+    </div>
     <div class="categories-grid">
+        <div class="category-card">
+            <i class="fa-solid fa-store"></i>
+            <span>Lojas</span>
+        </div>
         <div class="category-card">
             <i class="fa-solid fa-cookie-bite"></i>
             <span>Cookies</span>
@@ -31,8 +42,90 @@
         </div>
         <div class="category-card">
             <i class="fa-solid fa-mug-hot"></i>
-            <span>Bebidas</span>
+            <span>Cafés</span>
         </div>
+    </div>
+</section>
+
+<!-- Filtros Rápidos de Vendedores -->
+<div class="filters-bar">
+    <button class="filter-chip active">Todas as lojas</button>
+    <button class="filter-chip"><i class="fa-solid fa-star"></i> Super Confeiteiras</button>
+    <button class="filter-chip"><i class="fa-solid fa-clock"></i> Retire em até 30 min</button>
+</div>
+
+<!-- Lista de Confeiteiras / Lojas Parceiras -->
+<section class="stores-section">
+    <div class="section-header">
+        <h3 class="section-title">Docerias na sua região 🍰</h3>
+    </div>
+    
+    <div class="stores-grid">
+        <!-- Card Loja 1 -->
+        <a href="#" class="store-card">
+            <div class="store-logo">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="store-info">
+                <h4>Confeitaria Doce Sonho</h4>
+                <div class="store-meta">
+                    <span class="rating">★ 4.9</span>
+                    <span class="dot">•</span>
+                    <span>Bolos & Doces</span>
+                    <span class="dot">•</span>
+                    <span>1.2 km</span>
+                </div>
+                <div class="store-meta">
+                    <span>25-35 min</span>
+                    <span class="dot">•</span>
+                    <span style="color: #27ae60;">Grátis</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Card Loja 2 -->
+        <a href="#" class="store-card">
+            <div class="store-logo">
+                <i class="fa-solid fa-cookie"></i>
+            </div>
+            <div class="store-info">
+                <h4>Cinnamon & Co.</h4>
+                <div class="store-meta">
+                    <span class="rating">★ 4.8</span>
+                    <span class="dot">•</span>
+                    <span>Cookies & Drinks</span>
+                    <span class="dot">•</span>
+                    <span>2.5 km</span>
+                </div>
+                <div class="store-meta">
+                    <span>40-50 min</span>
+                    <span class="dot">•</span>
+                    <span>R$ 5,00</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Card Loja 3 -->
+        <a href="#" class="store-card">
+            <div class="store-logo">
+                <i class="fa-solid fa-ice-cream"></i>
+            </div>
+            <div class="store-info">
+                <h4>Gelateria da Nuvem</h4>
+                <div class="store-meta">
+                    <span class="rating">★ 5.0</span>
+                    <span class="dot">•</span>
+                    <span>Sorvetes Artesanais</span>
+                    <span class="dot">•</span>
+                    <span>0.8 km</span>
+                </div>
+                <div class="store-meta">
+                    <span>15-25 min</span>
+                    <span class="dot">•</span>
+                    <span style="color: #27ae60;">Grátis</span>
+                </div>
+            </div>
+        </a>
     </div>
 </section>
 {% endblock %}

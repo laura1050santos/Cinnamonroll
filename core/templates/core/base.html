@@ -13,6 +13,7 @@
     <!-- Arquivo CSS Externo (Django Static) -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'forms.css' %}">
 
     {% block head %}{% endblock %}
 </head>
@@ -20,16 +21,11 @@
 
     <!-- CABEÇALHO -->
     <header>
-        <div class="logo-area">
-            <i class="fa-solid fa-cloud"></i>
-            <h1>Cinnamonroll</h1>
-        </div>
-
-        <div class="address-bar">
-            <i class="fa-solid fa-location-dot" style="color: var(--accent-pink);"></i>
-            <span>Entregar em: <strong>Rua das Nuvens Fofas, 123</strong></span>
-            <i class="fa-solid fa-angle-down"></i>
-        </div>
+       <div class="logo-area">
+    <img src="{% static 'img/cinnamonroll.png.png' %}" alt="Cinnamonroll Logo" class="logo-icon">
+    <h1>Cinnamonroll</h1>
+</div>
+       
 
         <div class="user-actions">
             <a href="{% url 'login' %}" class="btn-action"><i class="fa-regular fa-user"></i> Entrar</a>

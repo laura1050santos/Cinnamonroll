@@ -27,6 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# config/settings.py
+
+STATIC_URL = '/static/'
+
+# Adicione esta linha para ensinar o Django a achar a pasta static na raiz do projeto
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Application definition
 

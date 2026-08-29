@@ -1,14 +1,29 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block title %}Criar Conta - Cinnamonroll{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="register-section">
-    <div class="register-container">
-        <h2>Criar uma conta</h2>
+<div class="login-fullscreen">
+    <!-- Lado Esquerdo: Imagem da tela inteira -->
+    <div class="login-image-full">
+        <h3>Faça parte do Cinnamonroll 🍰</h3>
+        <p>Crie sua conta para pedir os doces mais fofos da cidade ou vender os seus!</p>
+    </div>
+
+    <!-- Lado Direito: Formulário de Cadastro -->
+    <div class="login-form-full">
+        <div class="form-header">
+            <h2>Criar uma conta</h2>
+            <p>Preencha os dados abaixo para se cadastrar.</p>
+        </div>
 
         {% if erro %}
-            <div class="alert-error" style="color: red; background: #ffe6e6; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+            <div class="alert-error">
                 {{ erro }}
             </div>
         {% endif %}
@@ -16,8 +31,9 @@
         <form method="POST" id="register-form">
             {% csrf_token %}
             
+            <!-- Seleção Cliente / Vendedor -->
             <div class="user-type-group">
-                <label class="user-type-label">Pretende vender produtos?:</label>
+                <label class="user-type-label">Como deseja usar a plataforma?</label>
                 <div class="user-type-options">
                     <label class="radio-card">
                         <input type="radio" name="tipo_usuario" value="cliente" checked>
@@ -36,48 +52,48 @@
                 </div>
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label for="confirmar_senha">Confirmar Senha</label>
-                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha" required>
             </div>
 
             <button type="submit" class="btn-submit">Continuar</button>
         </form>
 
-        <p class="login-redirect" style="text-align: center; margin-top: 15px;">
-            Já registrado? <a href="{% url 'login' %}">faça o login aqui</a>
-        </p>
+        <div class="form-footer">
+            <p>Já registrado? <a href="{% url 'login' %}">Faça o login aqui</a></p>
+        </div>
     </div>
-</section>
+</div>
 
 <script>
     document.getElementById('register-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita o envio padrão para tratarmos no backend/frontend
+        event.preventDefault();
         
         const tipoUsuario = document.querySelector('input[name="tipo_usuario"]:checked').value;
         
         if (tipoUsuario === 'vendedor') {
-            this.action = "{% url 'cadastro_loja' %}"; // Nome da URL do cadastro de loja
+            this.action = "{% url 'cadastro_loja' %}";
         } else {
-            this.action = "{% url 'homepage' %}"; // Nome da URL da página inicial
+            this.action = "{% url 'homepage' %}";
         }
         
-        this.submit(); // Envia o formulário para a rota definida
+        this.submit();
     });
 </script>
 {% endblock %}

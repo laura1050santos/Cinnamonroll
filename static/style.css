@@ -1,0 +1,415 @@
+:root {
+    --primary-blue: #a8dadc;
+    --light-blue: #f4f9f9;
+    --accent-pink: #ff94b9;
+    --soft-pink-bg: #fff0f5;
+    --soft-yellow: #fff3bf;
+    --text-color: #3b5266;
+    --text-muted: #7890a8;
+    --white: #ffffff;
+    --gray-bg: #f4f6f8;
+    --border-color: #eef2f6;
+    --shadow-soft: 0 4px 16px rgba(168, 218, 220, 0.15);
+    --border-radius-lg: 20px;
+    --border-radius-sm: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    background-color: var(--light-blue);
+    color: var(--text-color);
+}
+
+/* --- CABEÇALHO --- */
+header {
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 8%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.logo-area i {
+    font-size: 28px;
+    color: var(--accent-pink);
+}
+
+.logo-area h1 {
+    font-size: 22px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.address-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gray-bg);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-action {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-color);
+    padding: 10px 16px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action:hover {
+    background-color: var(--gray-bg);
+    color: var(--accent-pink);
+}
+
+.btn-cart {
+    background-color: var(--accent-pink) !important;
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(255, 148, 185, 0.3);
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+main {
+    max-width: 1140px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Barra de Busca */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border-radius: 30px;
+    padding: 6px 6px 6px 20px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 25px;
+    border: 2px solid var(--border-color);
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: transparent;
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-box button {
+    background: var(--accent-pink);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Banner Principal */
+.hero-section {
+    background-color: var(--accent-pink);
+    border-radius: var(--border-radius-lg);
+    padding: 35px 45px;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    box-shadow: var(--shadow-soft);
+}
+
+.hero-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Categorias */
+section {
+    margin-bottom: 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 16px;
+}
+
+.category-card {
+    background: var(--white);
+    padding: 18px 10px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-pink);
+    background-color: var(--soft-pink-bg);
+}
+
+.category-card i {
+    font-size: 28px;
+    color: var(--accent-pink);
+}
+
+.category-card span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Filtros de Lojas */
+.filters-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.filter-chip {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-chip:hover, .filter-chip.active {
+    background-color: var(--soft-pink-bg);
+    border-color: var(--accent-pink);
+    color: var(--accent-pink);
+}
+
+/* Lista de Lojas */
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.store-card {
+    background: var(--white);
+    border-radius: var(--border-radius-sm);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.store-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-pink);
+}
+
+.store-logo {
+    width: 64px;
+    height: 64px;
+    background-color: var(--soft-yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--accent-pink);
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+
+.store-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.store-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.store-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.store-meta .rating {
+    color: #f39c12;
+    font-weight: 700;
+}
+
+.store-meta .dot {
+    font-size: 8px;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--white);
+    margin-top: 60px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 2px dashed var(--primary-blue);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+/* --- COMPONENTES EXTRAS DO CADASTRO --- */
+
+/* Alerta de erro */
+.alert-error {
+    background-color: #ffe5ec;
+    color: #ff4d6d;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid #ffb3c1;
+}
+
+/* Seleção de Tipo de Usuário (Radio Cards) */
+.user-type-group {
+    margin-bottom: 20px;
+}
+
+.user-type-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.user-type-options {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-card {
+    flex: 1;
+    cursor: pointer;
+}
+
+.radio-card input[type="radio"] {
+    display: none; /* Esconde o botão padrão do rádio */
+}
+
+.radio-card .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    background-color: var(--gray-bg);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Quando o radio card está selecionado */
+.radio-card input[type="radio"]:checked + .card-content {
+    border-color: var(--accent-pink);
+    background-color: #fff0f5;
+    color: var(--accent-pink);
+    box-shadow: 0 4px 10px rgba(255, 148, 185, 0.2);
+}
+
+.radio-card .card-content i {
+    font-size: 16px;
+}

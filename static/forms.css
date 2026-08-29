@@ -1,0 +1,141 @@
+/* --- LAYOUT FULLSCREEN (TELA CHEIA) --- */
+.login-fullscreen {
+    display: flex;
+    width: 100vw;
+    min-height: calc(100vh - 80px); /* Ocupa a altura inteira descontando o header */
+    margin-left: calc(-50vw + 50%); /* Força a div a sair dos limites do main */
+    margin-right: calc(-50vw + 50%);
+    margin-top: -30px; /* Gruda no topo abaixo do header */
+    margin-bottom: -60px; /* Gruda no rodapé */
+    background: var(--white);
+}
+
+/* Lado Esquerdo: Imagem da tela inteira */
+.login-image-full {
+    flex: 1.2;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), 
+                url('https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=1200') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px;
+    color: var(--white);
+}
+
+.login-image-full h3 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.login-image-full p {
+    font-size: 16px;
+    opacity: 0.95;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Lado Direito: Formulário centralizado na sua metade */
+.login-form-full {
+    flex: 1;
+    padding: 60px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--white);
+}
+
+.form-header {
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    font-size: 28px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.form-header p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    font-size: 15px;
+    background-color: var(--gray-bg);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--accent-pink);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 148, 185, 0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--accent-pink);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(255, 148, 185, 0.35);
+    margin-top: 10px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    background-color: #ff7da8;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.form-footer a {
+    color: var(--accent-pink);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 900px) {
+    .login-fullscreen {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .login-image-full {
+        min-height: 250px;
+        padding: 30px;
+    }
+    .login-form-full {
+        padding: 40px 25px;
+    }
+}
+
