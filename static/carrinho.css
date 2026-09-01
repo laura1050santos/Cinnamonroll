@@ -1,0 +1,185 @@
+/* ==========================================
+   CARRINHO VAZIO (LAYOUT INTEGRADO & FULL)
+   ========================================== */
+
+.carrinho-vazio-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+/* Card Banner Principal */
+.carrinho-vazio-card {
+    background: linear-gradient(135deg, #FFF0F3 0%, #FFFFFF 100%);
+    border-radius: 28px;
+    padding: 48px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    border: 2px dashed #FFD6E0;
+    box-shadow: 0 10px 30px rgba(255, 133, 161, 0.05);
+}
+
+.vazio-ilustracao {
+    width: 110px;
+    height: 110px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(255, 133, 161, 0.15);
+    flex-shrink: 0;
+}
+
+.vazio-ilustracao svg {
+    width: 52px;
+    height: 52px;
+    stroke: #FF6B8B;
+}
+
+.vazio-texto h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #4A4044;
+    margin-bottom: 8px;
+}
+
+.vazio-texto p {
+    color: #8C7A82;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.btn-explorar {
+    display: inline-block;
+    background: linear-gradient(135deg, #FF85A1, #FF6B8B);
+    color: #FFFFFF;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.3);
+    transition: all 0.25s ease;
+}
+
+.btn-explorar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(255, 107, 139, 0.4);
+}
+
+/* Seção de Sugestões de Doces */
+.sugestoes-secao {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid #F6E6E9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.sugestoes-header {
+    margin-bottom: 24px;
+}
+
+.sugestoes-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4A4044;
+    margin-bottom: 4px;
+}
+
+.sugestoes-header p {
+    font-size: 0.85rem;
+    color: #9E8E93;
+}
+
+.sugestoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.sugestao-card {
+    background: #FFF9FA;
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid #F8E5E8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.sugestao-card:hover {
+    transform: translateY(-4px);
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(255, 133, 161, 0.12);
+}
+
+.sugestao-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #FF6B8B;
+    color: #FFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+.sugestao-img-placeholder {
+    font-size: 2.8rem;
+    margin: 12px 0;
+}
+
+.sugestao-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #4A4044;
+    margin-bottom: 6px;
+}
+
+.sugestao-preco {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #4EBA8A;
+    margin-bottom: 14px;
+}
+
+.btn-adicionar-rapido {
+    width: 100%;
+    background: #FFFFFF;
+    color: #FF6B8B;
+    border: 1.5px solid #FFD6E0;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-adicionar-rapido:hover {
+    background: #FF6B8B;
+    color: #FFFFFF;
+    border-color: #FF6B8B;
+}
+
+/* Responsivo */
+@media (max-width: 650px) {
+    .carrinho-vazio-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 20px;
+    }
+}

@@ -5,6 +5,7 @@
 {% block head %}
 
 <link rel="stylesheet" href="{% static 'forms.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho.css' %}">
 
 {% endblock %}
 
@@ -13,7 +14,7 @@
 <div class="carrinho-container">
 
     <div class="carrinho-header">
-        <h1>Meu Carrinho 🛒</h1>
+        <h1>Meu Carrinho </h1>
         <p>Confira os produtos que você escolheu.</p>
     </div>
 
@@ -188,26 +189,69 @@
 
         <!-- CARRINHO VAZIO -->
 
-        <div class="carrinho-vazio">
+        
 
-            <div class="carrinho-vazio-icon">
-                🛒
+  
+        
+        <!-- CARD PRINCIPAL DE AVISO -->
+        <div class="carrinho-vazio-card">
+            <div class="vazio-ilustracao">
+                <!-- Ícone Grande e Fofo de Sacola/Doces -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+            </div>
+            
+            <div class="vazio-texto">
+                <h2>Sua sacola está vazia!</h2>
+                <p>Que tal escolher um doce delicioso para adoçar o seu dia?</p>
+                
+                <a href="{% url 'cardapio' %}" class="btn-explorar">
+                    Explorar o Cardápio ✨
+                </a>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DE RECOMENDAÇÕES PARA PREENCHER A TELA -->
+        <div class="sugestoes-secao">
+            <div class="sugestoes-header">
+                <h3>Queridinhos da semana 🍓</h3>
+                <p>Confira os doces mais pedidos pelos nossos clientes</p>
             </div>
 
-            <h2>Seu carrinho está vazio</h2>
+            <div class="sugestoes-grid">
+                <!-- Exemplo de Card de Sugestão 1 -->
+                <div class="sugestao-card">
+                    <div class="sugestao-badge">Mais vendido</div>
+                    <div class="sugestao-img-placeholder">🍰</div>
+                    <h4>Cinnamon Roll Tradicional</h4>
+                    <p class="sugestao-preco">R$ 14,90</p>
+                    <a href="{% url 'cardapio' %}" class="btn-adicionar-rapido">+ Adicionar</a>
+                </div>
 
-            <p>
-                Você ainda não adicionou nenhum produto.
-            </p>
+                <!-- Exemplo de Card de Sugestão 2 -->
+                <div class="sugestao-card">
+                    <div class="sugestao-img-placeholder">🧁</div>
+                    <h4>Cupcake de Morango</h4>
+                    <p class="sugestao-preco">R$ 12,00</p>
+                    <a href="{% url 'cardapio' %}" class="btn-adicionar-rapido">+ Adicionar</a>
+                </div>
 
-            <a
-                href="{% url 'cardapio' %}"
-                class="continuar-btn"
-            >
-                Ver produtos
-            </a>
-
+                <!-- Exemplo de Card de Sugestão 3 -->
+                <div class="sugestao-card">
+                    <div class="sugestao-img-placeholder">🍩</div>
+                    <h4>Donut Red Velvet</h4>
+                    <p class="sugestao-preco">R$ 10,50</p>
+                    <a href="{% url 'cardapio' %}" class="btn-adicionar-rapido">+ Adicionar</a>
+                </div>
+            </div>
         </div>
+
+    </div>
+
+
 
     {% endif %}
 

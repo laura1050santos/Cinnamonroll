@@ -2,6 +2,8 @@
 Cinnamonroll é uma plataforma de venda de doces, conectando vendedores autônomos, pequenas empresas e seus clientes
 
 Rodar:
+
+Linux:
 - cd Documentos
 - cd GitHub
 - cd Cinnamonroll
@@ -14,3 +16,24 @@ Rodar:
 - python -m django --version
 - pip install Pillow
 - python manage.py runserver
+
+Power Shell: 
+cd Documentos
+cd GitHub
+cd Cinnamonroll
+
+ls
+
+python -m venv venv
+
+ls
+
+.\venv\Scripts\Activate.ps1
+
+pip install django
+
+python -m django --version
+
+pip install Pillow
+
+python manage.py runserver
