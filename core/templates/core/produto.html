@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<form method="post" action="{% url 'adicionar_carrinho' produto.id %}">
+    {% csrf_token %}
+
+    <button type="submit">
+        Adicionar ao carrinho
+    </button>
+</form>

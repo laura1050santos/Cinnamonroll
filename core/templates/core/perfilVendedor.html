@@ -1,0 +1,180 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="perfil-vendedor">
+
+    <!-- CABEÇALHO DA LOJA -->
+    <section class="loja-cabecalho">
+
+        <div class="loja-foto">
+
+            {% if perfil.foto %}
+                <img src="{{ perfil.foto.url }}" alt="Foto da loja">
+            {% else %}
+                <div class="loja-foto-vazia">
+                    🏪
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="loja-informacoes">
+
+            <span class="tipo-conta">
+                Vendedor
+            </span>
+
+            <h1>
+                {% if perfil.nome_loja %}
+                    {{ perfil.nome_loja }}
+                {% else %}
+                    Minha Loja
+                {% endif %}
+            </h1>
+
+            {% if perfil.descricao_loja %}
+                <p class="descricao-loja">
+                    {{ perfil.descricao_loja }}
+                </p>
+            {% else %}
+                <p class="descricao-vazia">
+                    Sua loja ainda não possui uma descrição.
+                </p>
+            {% endif %}
+
+            <div class="informacoes-contato">
+
+                {% if perfil.telefone %}
+                    <div>
+                        📞
+                        <span>{{ perfil.telefone }}</span>
+                    </div>
+                {% endif %}
+
+                {% if perfil.endereco %}
+                    <div>
+                        📍
+                        <span>{{ perfil.endereco }}</span>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <a href="{% url 'cadastro_loja' %}" class="botao-editar">
+                ✏️ Editar loja
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUTOS DA LOJA -->
+    <section class="produtos-loja">
+
+        <div class="produtos-cabecalho">
+
+            <div>
+                <h2>Meus produtos</h2>
+
+                <p>
+                    Produtos cadastrados na sua loja
+                </p>
+            </div>
+
+            <!-- Vamos conectar esse botão depois -->
+            <a href="#" class="botao-adicionar">
+                + Cadastrar produto
+            </a>
+
+        </div>
+
+
+        {% if produtos %}
+
+            <div class="produtos-grid">
+
+                {% for produto in produtos %}
+
+                    <div class="produto-card">
+
+                        <div class="produto-imagem">
+
+                            {% if produto.imagem %}
+                                <img
+                                    src="{{ produto.imagem.url }}"
+                                    alt="{{ produto.nome }}"
+                                >
+                            {% else %}
+                                <div class="produto-sem-imagem">
+                                    🍰
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="produto-info">
+
+                            <h3>
+                                {{ produto.nome }}
+                            </h3>
+
+                            <p>
+                                {{ produto.descricao }}
+                            </p>
+
+                            <div class="produto-detalhes">
+
+                                <strong>
+                                    R$ {{ produto.preco|floatformat:2 }}
+                                </strong>
+
+                                <span>
+                                    Estoque: {{ produto.estoque }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="sem-produtos">
+
+                <div class="sem-produtos-icon">
+                    🛍️
+                </div>
+
+                <h3>
+                    Você ainda não possui produtos
+                </h3>
+
+                <p>
+                    Cadastre seu primeiro produto para começar a vender.
+                </p>
+
+                <a href="#" class="botao-adicionar">
+                    + Cadastrar primeiro produto
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}

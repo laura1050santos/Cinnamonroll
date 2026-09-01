@@ -1,11 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="carrinho-container">
+
+    <div class="carrinho-header">
+        <h1>Meu Carrinho 🛒</h1>
+        <p>Confira os produtos que você escolheu.</p>
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="carrinho-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    {% if itens %}
+
+        <div class="carrinho-conteudo">
+
+            <!-- PRODUTOS -->
+
+            <div class="carrinho-produtos">
+
+                {% for item in itens %}
+
+                    <div class="carrinho-item">
+
+                        <!-- IMAGEM -->
+
+                        <div class="carrinho-imagem">
+
+                            {% if item.produto.imagem %}
+
+                                <img
+                                    src="{{ item.produto.imagem.url }}"
+                                    alt="{{ item.produto.nome }}"
+                                >
+
+                            {% else %}
+
+                                <div class="sem-imagem">
+                                    Sem imagem
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- INFORMAÇÕES -->
+
+                        <div class="carrinho-info">
+
+                            <h2>
+                                {{ item.produto.nome }}
+                            </h2>
+
+                            <p class="carrinho-descricao">
+                                {{ item.produto.descricao }}
+                            </p>
+
+                            <p class="carrinho-preco">
+                                R$
+                                {{ item.produto.preco|floatformat:2 }}
+                            </p>
+
+
+                            <!-- QUANTIDADE -->
+
+                            <div class="quantidade-container">
+
+                                <span>Quantidade:</span>
+
+                                <div class="quantidade-controle">
+
+                                    <a
+                                        href="{% url 'diminuir_quantidade' item.id %}"
+                                        class="quantidade-btn"
+                                    >
+                                        −
+                                    </a>
+
+                                    <span class="quantidade">
+                                        {{ item.quantidade }}
+                                    </span>
+
+                                    <a
+                                        href="{% url 'aumentar_quantidade' item.id %}"
+                                        class="quantidade-btn"
+                                    >
+                                        +
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SUBTOTAL -->
+
+                        <div class="carrinho-subtotal">
+
+                            <span>Subtotal</span>
+
+                            <strong>
+                                R$
+                                {{ item.subtotal|floatformat:2 }}
+                            </strong>
+
+                            <a
+                                href="{% url 'remover_do_carrinho' item.id %}"
+                                class="remover-btn"
+                            >
+                                🗑️ Remover
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- RESUMO -->
+
+            <div class="carrinho-resumo">
+
+                <h2>Resumo do pedido</h2>
+
+                <div class="resumo-linha">
+
+                    <span>Produtos</span>
+
+                    <span>
+                        {{ itens|length }}
+                    </span>
+
+                </div>
+
+                <div class="resumo-linha total">
+
+                    <span>Total</span>
+
+                    <strong>
+                        R$ {{ total|floatformat:2 }}
+                    </strong>
+
+                </div>
+
+                <button class="finalizar-btn" type="button">
+                    Finalizar pedido
+                </button>
+
+                <a
+                    href="{% url 'cardapio' %}"
+                    class="continuar-btn"
+                >
+                    Continuar comprando
+                </a>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <!-- CARRINHO VAZIO -->
+
+        <div class="carrinho-vazio">
+
+            <div class="carrinho-vazio-icon">
+                🛒
+            </div>
+
+            <h2>Seu carrinho está vazio</h2>
+
+            <p>
+                Você ainda não adicionou nenhum produto.
+            </p>
+
+            <a
+                href="{% url 'cardapio' %}"
+                class="continuar-btn"
+            >
+                Ver produtos
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

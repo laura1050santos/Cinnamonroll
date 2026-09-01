@@ -64,6 +64,7 @@ class Carrinho(models.Model):
 
 
 class ItemCarrinho(models.Model):
+
     carrinho = models.ForeignKey(
         Carrinho,
         on_delete=models.CASCADE,
@@ -77,10 +78,12 @@ class ItemCarrinho(models.Model):
 
     quantidade = models.PositiveIntegerField(default=1)
 
+    class Meta:
+        unique_together = ('carrinho', 'produto')
+
     @property
     def subtotal(self):
         return self.quantidade * self.produto.preco
-
 
 class Pedido(models.Model):
     STATUS = (

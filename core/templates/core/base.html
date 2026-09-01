@@ -1,51 +1,197 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cinnamonroll - O Delivery de Doces Mais Fofo do Mundo{% endblock %}</title>
-    
+
+    <title>
+        {% block title %}
+            Cinnamonroll - O Delivery de Doces Mais Fofo do Mundo
+        {% endblock %}
+    </title>
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Arquivo CSS Externo (Django Static) -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- Django Static -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'forms.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="{% static 'style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'forms.css' %}"
+    >
 
     {% block head %}{% endblock %}
+
 </head>
+
+
 <body>
 
     <!-- CABEÇALHO -->
+
     <header>
-       <div class="logo-area">
-    <img src="{% static 'img/cinnamonroll.png.png' %}" alt="Cinnamonroll Logo" class="logo-icon">
-    <h1>Cinnamonroll</h1>
-</div>
-       
+
+<a href="{% url 'homepage' %}" class="logo-link">
+
+    <div class="logo-area">
+
+        <img
+            src="{% static 'img/cinnamonroll.png.png' %}"
+            alt="Cinnamonroll Logo"
+            class="logo-icon"
+        >
+
+        <h1>Cinnamonroll</h1>
+
+    </div>
+
+</a>
+
 
         <div class="user-actions">
-            <a href="{% url 'login' %}" class="btn-action"><i class="fa-regular fa-user"></i> Entrar</a>
-            <a href="{% url 'cadastro' %}" class="btn-action"><i class="fa-solid fa-user-plus"></i> Cadastrar</a>
-            <a href="{% url 'carrinho' %}" class="btn-cart"><i class="fa-solid fa-basket-shopping"></i> Sacola</a>
+
+            {% if user.is_authenticated %}
+
+                <!-- USUÁRIO LOGADO -->
+
+                {% if user.perfil.tipo == "CLIENTE" %}
+
+                    <!-- PERFIL DO CLIENTE -->
+
+                    <a
+                        href="{% url 'perfilCliente' %}"
+                        class="btn-action"
+                        title="Meu perfil"
+                    >
+                        <i class="fa-solid fa-user"></i>
+                        Perfil
+                    </a>
+
+
+                    <!-- SACOLA DO CLIENTE -->
+
+                    <a
+                        href="{% url 'carrinho' %}"
+                        class="btn-cart"
+                    >
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        Sacola
+                    </a>
+
+
+                {% elif user.perfil.tipo == "VENDEDOR" %}
+
+                    <!-- PERFIL DO VENDEDOR -->
+
+                    <a
+                        href="{% url 'perfilVendedor' %}"
+                        class="btn-action"
+                        title="Minha loja"
+                    >
+                        <i class="fa-solid fa-store"></i>
+                        Minha loja
+                    </a>
+
+
+                {% elif user.perfil.tipo == "ADMINISTRADOR" %}
+
+                    <!-- PERFIL DO ADMINISTRADOR -->
+
+                    <a
+                        href="{% url 'perfilAdmin' %}"
+                        class="btn-action"
+                        title="Painel administrativo"
+                    >
+                        <i class="fa-solid fa-user-shield"></i>
+                        Admin
+                    </a>
+
+                {% endif %}
+
+
+                <!-- LOGOUT -->
+<a
+    href="{% url 'logout' %}"
+    class="btn-action"
+>
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Sair
+</a>
+
+            {% else %}
+
+                <!-- USUÁRIO NÃO LOGADO -->
+
+                <a
+                    href="{% url 'login' %}"
+                    class="btn-action"
+                >
+                    <i class="fa-regular fa-user"></i>
+                    Entrar
+                </a>
+
+
+                <a
+                    href="{% url 'cadastro' %}"
+                    class="btn-action"
+                >
+                    <i class="fa-solid fa-user-plus"></i>
+                    Cadastrar
+                </a>
+
+            {% endif %}
+
         </div>
+
     </header>
 
+
     <!-- CONTEÚDO PRINCIPAL -->
+
     <main>
+
         {% block content %}
-        <!-- O conteúdo específico de cada página será injetado aqui -->
+
+            <!-- O conteúdo específico de cada página será injetado aqui -->
+
         {% endblock %}
+
     </main>
 
+
     <!-- RODAPÉ -->
+
     <footer>
-        <p>&copy; 2026 Cinnamonroll Delivery de Doces. Inspirado na estética da Sanrio e na praticidade do iFood.</p>
+
+        <p>
+            &copy; 2026 Cinnamonroll Delivery de Doces.
+            Inspirado na estética da Sanrio e na praticidade do iFood.
+        </p>
+
     </footer>
 
+
     {% block scripts %}{% endblock %}
+
 </body>
+
 </html>
