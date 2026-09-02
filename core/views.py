@@ -392,13 +392,16 @@ def adicionar_carrinho(request, id):
 
     return redirect('carrinho')
 
-@login_required
-def cadastro_produto(request):
-    perfil = request.user.perfil
+#cadastro de produtos pelo vendedor
 
-    if perfil.tipo != 'VENDEDOR':
+@login_required
+def cadastrar_produto(request):
+    perfil, created = Perfil.objects.get_or_create(usuario=request.user)
+
+    if perfil.tipo != "VENDEDOR":
         return redirect('homepage')
-    
+
+
     if request.method == 'POST':
         nome = request.POST.get('nome')
         descricao = request.POST.get('descricao')
@@ -407,6 +410,7 @@ def cadastro_produto(request):
         imagem = request.FILES.get('imagem')
 
         produto = Produto.objects.create(
+
             nome=nome,
             descricao=descricao,
             preco=preco,
@@ -414,10 +418,9 @@ def cadastro_produto(request):
             imagem=imagem,
             vendedor=perfil
         )
-
-        return redirect('perfilVendedor')
+        return redirect('perfil_vendedor')
     
-    return render(request, 'core/cadastro_produto.html')
+    return render(request, 'core/cadastrarProdutos.html')
 
 
 def sair(request):

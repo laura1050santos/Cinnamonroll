@@ -2,6 +2,8 @@ from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
 
+from core import views
+
 urlpatterns = [
     path('', homepage, name='homepage'),
     path('searchpage/', searchpage, name='searchpage'),
@@ -68,4 +70,9 @@ urlpatterns = [
     ),
 
     path('pedido/', pedido, name='pedido'),
+
+    path('vendedor/produto/cadastrar/', views.cadastrar_produto, name='cadastrar_produto'),
+    path('vendedor/loja/editar/', views.editar_loja, name='editar_loja'),
+    path('loja/<int:loja_id>/', views.consultar_loja, name='consultar_loja'),
+    path('vendedor/perfil/', views.perfil_vendedor, name='perfil_vendedor'),
 ]
