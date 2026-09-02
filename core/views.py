@@ -7,6 +7,12 @@ def homepage(request):
 
 def searchpage(request):
     return render(request, 'core/searchpage.html')
+<<<<<<< Updated upstream
+=======
+
+def buscar(request):
+    termo = request.GET.get('q', '').strip()
+>>>>>>> Stashed changes
 
 def login(request):
     return render(request, 'core/login.html')
