@@ -51,6 +51,7 @@ def searchpage(request):
     return render(request, 'core/searchpage.html')
 
 
+
 def cadastro(request):
     if request.method == 'POST':
 
@@ -114,6 +115,10 @@ def cadastro_loja(request):
     if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
 
+    return render(request, 'core/cadastro_loja.html')
+
+def editar_produto(request,id):
+    produto = get_object_or_404(Produto,id=id)
     if request.method == 'POST':
 
         nome_loja = request.POST.get('nome_loja')
@@ -162,6 +167,17 @@ def perfilCliente(request):
     })
 
 @login_required
+def excluir_perfil(request):
+
+    if request.method == 'POST':
+        usuario = request.user
+
+        logout(request)
+        usuario.delete()
+        messages.success(request, "Seu perfil foi excluído com sucesso." )
+        return redirect('homepage')
+
+@login_required
 def perfilVendedor(request):
     perfil = request.user.perfil
 
@@ -174,6 +190,7 @@ def perfilVendedor(request):
         'perfil': perfil,
         'produtos': produtos
     })
+
 
 @login_required
 def perfilAdmin(request):
