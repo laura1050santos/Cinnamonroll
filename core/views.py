@@ -48,9 +48,21 @@ def homepage(request):
     return render(request, 'core/homepage.html')
 
 def searchpage(request):
+
     return render(request, 'core/searchpage.html')
+    
+def buscar(request):
+    termo = request.GET.get('q', '').strip()
 
+    produtos = Produto.objects.all()
 
+    if termo:
+        produtos = produtos.filter(nome__icontains=termo)
+
+    return render(request, 'core/searchpage.html', {
+        'produtos': produtos,
+        'termo': termo
+    })
 
 def cadastro(request):
     if request.method == 'POST':
