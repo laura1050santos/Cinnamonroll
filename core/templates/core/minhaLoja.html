@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'loja_forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="perfil-vendedor">
+
+    <!-- CABEÇALHO DA LOJA (VISÃO CLIENTE) -->
+    <section class="loja-cabecalho cliente-view">
+
+        <div class="loja-foto">
+            {% if loja.foto %}
+                <img src="{{ loja.foto.url }}" alt="{{ loja.nome_loja }}">
+            {% else %}
+                <div class="loja-foto-vazia">🏪</div>
+            {% endif %}
+        </div>
+
+        <div class="loja-informacoes">
+            <span class="tipo-conta badge-loja">Loja Parceira</span>
+
+            <h1>{{ loja.nome_loja|default:"Loja de Doces" }}</h1>
+
+            <p class="descricao-loja">
+                {{ loja.descricao_loja|default:"Esta loja é recheada de delícias feitas com muito carinho!" }}
+            </p>
+
+            <div class="informacoes-contato">
+                {% if loja.telefone %}
+                    <div>📞 <span>{{ loja.telefone }}</span></div>
+                {% endif %}
+                {% if loja.endereco %}
+                    <div>📍 <span>{{ loja.endereco }}</span></div>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CARDÁPIO DA LOJA -->
+    <section class="produtos-loja">
+        <div class="produtos-cabecalho">
+            <div>
+                <h2>Cardápio da Loja ✨</h2>
+                <p>Escolha seus doces favoritos para adicionar ao carrinho</p>
+            </div>
+        </div>
+
+        {% if produtos %}
+            <div class="produtos-grid">
+                {% for produto in produtos %}
+                    <div class="produto-card">
+                        <div class="produto-imagem">
+                            {% if produto.imagem %}
+                                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                            {% else %}
+                                <div class="produto-sem-imagem">🍰</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="produto-info">
+                            <h3>{{ produto.nome }}</h3>
+                            <p>{{ produto.descricao }}</p>
+
+                            <div class="produto-detalhes">
+                                <strong>R$ {{ produto.preco|floatformat:2 }}</strong>
+                                
+                                {% if produto.estoque > 0 %}
+                                    <form method="POST" action="{% url 'adicionar_carrinho' produto.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-adicionar-carrinho">+ Adicionar</button>
+                                    </form>
+                                {% else %}
+                                    <span class="esgotado">Esgotado</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="sem-produtos">
+                <div class="sem-produtos-icon">🍰</div>
+                <h3>Esta loja ainda não possui doces no cardápio</h3>
+                <p>Volte em breve para conferir os produtos disponíveis!</p>
+            </div>
+        {% endif %}
+    </section>
+
+</div>
+{% endblock %}

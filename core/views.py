@@ -341,6 +341,83 @@ def adicionar_carrinho(request, id):
 
     return redirect('carrinho')
 
+#cadastro de produtos pelo vendedor
+
+@login_required
+def cadastrar_produto(request):
+    perfil, created = Perfil.objects.get_or_create(usuario=request.user)
+
+    if perfil.tipo != "VENDEDOR":
+        return redirect('homepage')
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
+        preco = request.POST.get('preco')
+        estoque = request.POST.get('estoque')
+        imagem = request.FILES.get('imagem')
+
+        # Cria o produto relacionando ao vendedor (perfil)
+        Produto.objects.create(
+            vendedor=perfil,
+            nome=nome,
+            descricao=descricao,
+            preco=preco,
+            estoque=estoque,
+            imagem=imagem
+        )
+        return redirect('perfil_vendedor')
+
+    return render(request, 'core/cadastrarProdutos.html')
+
+@login_required
+def editar_loja(request):
+    perfil, _ = Perfil.objects.get_or_create(usuario=request.user)
+
+    if request.method == 'POST':
+        perfil.nome_loja = request.POST.get('nome_loja')
+        perfil.descricao_loja = request.POST.get('descricao_loja')
+        perfil.telefone = request.POST.get('telefone')
+        perfil.endereco = request.POST.get('endereco')
+
+        # Atualiza a foto somente se o usuário tiver selecionado um novo arquivo
+        if request.FILES.get('foto'):
+            perfil.foto = request.FILES.get('foto')
+
+        perfil.save()
+        return redirect('perfil_vendedor')
+
+    return render(request, 'core/editarloja.html', {'perfil': perfil})
+
+def consultar_loja(request, loja_id):
+    loja = get_object_or_404(Perfil, pk=loja_id)
+    produtos = loja.produtos.all()
+
+    return render(request, 'core/minhaloja.html', {
+        'loja': loja,
+        'produtos': produtos
+    })
+
+@login_required
+def perfil_vendedor(request):
+    # Busca o perfil vinculado ao usuário logado
+    perfil, created = Perfil.objects.get_or_create(
+        usuario=request.user,
+        defaults={'tipo': 'VENDEDOR'}  # Caso não exista, define como VENDEDOR
+    )
+
+    # Verifica se o tipo é diferente de VENDEDOR (em maiúsculo!)
+    if perfil.tipo != "VENDEDOR":
+        return redirect('homepage')
+
+    # Busca os produtos onde o campo vendedor é o perfil atual
+    produtos = perfil.produtos.all()
+
+    return render(request, 'core/perfilVendedor.html', {
+        'perfil': perfil,
+        'produtos': produtos
+    })
+
 def sair(request):
     logout(request)
     return redirect('homepage')

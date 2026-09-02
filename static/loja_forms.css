@@ -1,0 +1,419 @@
+/* ==========================================
+   LOJA, PERFIL & FORMULÁRIOS (SOFT PASTELS)
+   ========================================== */
+
+:root {
+    --primary: #FF85A1;
+    --primary-hover: #FF6B8B;
+    --bg-light: #FFF9FA;
+    --card-bg: #FFFFFF;
+    --text-main: #4A4044;
+    --text-muted: #9E8E93;
+    --accent-green: #4EBA8A;
+    --border-soft: #F6E6E9;
+    --shadow-soft: 0 10px 30px rgba(255, 133, 161, 0.08);
+}
+
+/* Base Perfil */
+.perfil-vendedor {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.loja-cabecalho {
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 36px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+}
+
+.loja-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: var(--bg-light);
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 8px 20px rgba(255, 133, 161, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loja-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.loja-foto-vazia {
+    font-size: 3rem;
+}
+
+.loja-informacoes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tipo-conta {
+    background: #FFF0F3;
+    color: var(--primary-hover);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.loja-informacoes h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.descricao-loja {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.informacoes-contato {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.informacoes-contato div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-light);
+    padding: 6px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Grid de Produtos */
+.produtos-cabecalho h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.produtos-cabecalho p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.produto-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.produto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(255, 133, 161, 0.15);
+}
+
+.produto-imagem {
+    width: 100%;
+    height: 160px;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produto-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.produto-sem-imagem {
+    font-size: 2.5rem;
+}
+
+.produto-info {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.produto-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.produto-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.produto-detalhes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-soft);
+}
+
+.produto-detalhes strong {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent-green);
+}
+
+.btn-adicionar-carrinho {
+    background: var(--bg-light);
+    color: var(--primary-hover);
+    border: 1.5px solid var(--border-soft);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-adicionar-carrinho:hover {
+    background: var(--primary-hover);
+    color: #FFF;
+    border-color: var(--primary-hover);
+}
+
+.esgotado {
+    font-size: 0.75rem;
+    color: #E74C3C;
+    background: #FDEDEC;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+/* Estilos de Formulario (Cadastrar/Editar) */
+.form-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.form-card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 40px;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.form-badge {
+    background: #FFF0F3;
+    color: var(--primary-hover);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.form-header h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 10px 0 6px;
+}
+
+.form-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.form-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1.5px solid var(--border-soft);
+    background: var(--bg-light);
+    font-size: 0.95rem;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(255, 133, 161, 0.15);
+}
+
+/* Upload Customizado */
+.upload-box {
+    position: relative;
+    border: 2px dashed var(--border-soft);
+    background: var(--bg-light);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--primary);
+    background: #FFF0F3;
+}
+
+.upload-box input[type="file"] {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+.upload-conteudo p { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 0; }
+.upload-dica { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px; }
+
+.upload-conteudo.compact {
+    padding: 0;
+}
+
+.preview-foto-loja {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.preview-foto-loja img, 
+.foto-placeholder-preview {
+    width: 75px;
+    height: 75px;
+    border-radius: 18px;
+    object-fit: cover;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 1px solid var(--border-soft);
+}
+
+.flex-1 { flex: 1; }
+
+/* Botões do Formulário */
+.form-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: #FFF;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(255, 107, 139, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-salvar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(255, 107, 139, 0.4);
+}
+
+.btn-cancelar {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-soft);
+    padding: 12px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background: var(--bg-light);
+    color: var(--text-main);
+}
+
+@media (max-width: 600px) {
+    .input-grid-2 { grid-template-columns: 1fr; }
+    .form-card { padding: 24px; }
+    .preview-foto-loja { flex-direction: column; }
+}
