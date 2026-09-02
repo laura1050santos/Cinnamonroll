@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'loja_forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+
+    <div class="form-card">
+        <div class="form-header">
+            <span class="form-badge">Configurações</span>
+            <h2>Editar Minha Loja 🏪</h2>
+            <p>Atualize a foto, dados de contato e a apresentação do seu negócio.</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="form-conteudo">
+            {% csrf_token %}
+
+            <!-- Foto Atual + Troca -->
+            <div class="input-grupo">
+                <label>Foto do Perfil da Loja</label>
+                <div class="preview-foto-loja">
+                    {% if perfil.foto %}
+                        <img src="{{ perfil.foto.url }}" alt="Foto Atual" id="foto-preview">
+                    {% else %}
+                        <div class="foto-placeholder-preview">🏪</div>
+                    {% endif %}
+
+                    <div class="upload-box flex-1">
+                        <input type="file" id="foto" name="foto" accept="image/*">
+                        <div class="upload-conteudo compact">
+                            <span class="upload-icon">🔄</span>
+                            <p>Trocar foto da loja</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-grupo">
+                <label for="nome_loja">Nome da Loja</label>
+                <input type="text" id="nome_loja" name="nome_loja" value="{{ perfil.nome_loja|default:'' }}" placeholder="Ex: Laricadas Sweet Shop" required>
+            </div>
+
+            <div class="input-grupo">
+                <label for="descricao_loja">Descrição / Bio</label>
+                <textarea id="descricao_loja" name="descricao_loja" rows="3" placeholder="Conte a história da sua loja para seus clientes...">{{ perfil.descricao_loja|default:'' }}</textarea>
+            </div>
+
+            <div class="input-grid-2">
+                <div class="input-grupo">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="text" id="telefone" name="telefone" value="{{ perfil.telefone|default:'' }}" placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="input-grupo">
+                    <label for="endereco">Endereço da Loja</label>
+                    <input type="text" id="endereco" name="endereco" value="{{ perfil.endereco|default:'' }}" placeholder="Rua das Flores, 123">
+                </div>
+            </div>
+
+            <div class="form-acoes">
+                <a href="{% url 'perfilVendedor' %}" class="btn-cancelar">Voltar</a>
+<a href="{% url 'perfilVendedor' %}" class="btn-salvar">Voltar ao Perfil ✨</a>            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

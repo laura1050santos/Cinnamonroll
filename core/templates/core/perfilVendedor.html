@@ -67,7 +67,7 @@
 
             </div>
 
-            <a href="{% url 'cadastro_loja' %}" class="botao-editar">
+            <a href="{% url 'editar_loja' %}" class="botao-editar">
                 ✏️ Editar loja
             </a>
 
@@ -88,9 +88,8 @@
                     Produtos cadastrados na sua loja
                 </p>
             </div>
-
-            <!-- Vamos conectar esse botão depois -->
-            <a href="{% url 'cadastro_produto' %}" class="botao-adicionar">
+<!--conexão do botão-->
+<a href="{% url 'cadastro_produto' %}" class="botao-adicionar">
                 + Cadastrar produto
             </a>
 
@@ -166,7 +165,7 @@
                     Cadastre seu primeiro produto para começar a vender.
                 </p>
 
-                <a href="#" class="botao-adicionar">
+<a href="{% url 'cadastro_produto' %}" class="botao-adicionar">
                     + Cadastrar primeiro produto
                 </a>
 
