@@ -25,6 +25,8 @@ urlpatterns = [
     path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
     path('excluir-perfil/',excluir_perfil, name='excluir_perfil'),
+    path('searchpage/', searchpage, name='searchpage'),
+    path('buscar/', buscar, name='buscar'),
 
 
     path('cardapio/', cardapio, name='cardapio'),
