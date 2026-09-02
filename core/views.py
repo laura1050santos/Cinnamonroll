@@ -213,6 +213,12 @@ def perfilVendedor(request):
         'produtos': produtos
     })
 
+# core/views.py
+
+@login_required
+def editar_loja(request):
+    # Insira a lógica de edição da loja aqui
+    return render(request, 'core/editarloja.html')
 
 @login_required
 def perfilAdmin(request):
@@ -382,33 +388,29 @@ def adicionar_carrinho(request, id):
 
 #cadastro de produtos pelo vendedor
 
+
+# core/views.py
+
 @login_required
 def cadastrar_produto(request):
-    perfil, created = Perfil.objects.get_or_create(usuario=request.user)
+    perfil, _ = Perfil.objects.get_or_create(usuario=request.user)
 
     if perfil.tipo != "VENDEDOR":
         return redirect('homepage')
 
-
     if request.method == 'POST':
-        nome = request.POST.get('nome')
-        descricao = request.POST.get('descricao')
-        preco = request.POST.get('preco')
-        estoque = request.POST.get('estoque')
-        imagem = request.FILES.get('imagem')
-
-        produto = Produto.objects.create(
-
-            nome=nome,
-            descricao=descricao,
-            preco=preco,
-            estoque=estoque,
-            imagem=imagem,
-            vendedor=perfil
+        Produto.objects.create(
+            vendedor=perfil,
+            nome=request.POST.get('nome'),
+            descricao=request.POST.get('descricao'),
+            preco=request.POST.get('preco'),
+            estoque=request.POST.get('estoque'),
+            imagem=request.FILES.get('imagem')
         )
-        return redirect('perfil_vendedor')
-    
+        return redirect('perfilVendedor')
+
     return render(request, 'core/cadastrarProdutos.html')
+
 
 
 def sair(request):

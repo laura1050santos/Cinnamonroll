@@ -20,9 +20,7 @@ urlpatterns = [
 
     path('cadastro/', cadastro, name='cadastro'),
     path('cadastro-loja/', cadastro_loja, name='cadastro_loja'),
-    path('cadastro-produto/', cadastro_produto, name='cadastro_produto'),
-
-    path('dashboard/', dashboard, name='dashboard'),
+    path('cadastro-produto/', cadastrar_produto, name='cadastro_produto'),    path('dashboard/', dashboard, name='dashboard'),
     path('perfilCliente/', perfilCliente, name='perfilCliente'),
     path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
@@ -69,8 +67,5 @@ urlpatterns = [
 
     path('pedido/', pedido, name='pedido'),
 
-    path('vendedor/produto/cadastrar/', views.cadastrar_produto, name='cadastrar_produto'),
     path('vendedor/loja/editar/', views.editar_loja, name='editar_loja'),
-    path('loja/<int:loja_id>/', views.consultar_loja, name='consultar_loja'),
-    path('vendedor/perfil/', views.perfil_vendedor, name='perfil_vendedor'),
 ]
