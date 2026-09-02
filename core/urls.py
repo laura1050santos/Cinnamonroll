@@ -20,11 +20,14 @@ urlpatterns = [
 
     path('cadastro/', cadastro, name='cadastro'),
     path('cadastro-loja/', cadastro_loja, name='cadastro_loja'),
+    path('cadastro-produto/', cadastro_produto, name='cadastro_produto'),
 
     path('dashboard/', dashboard, name='dashboard'),
     path('perfilCliente/', perfilCliente, name='perfilCliente'),
     path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
+    path('excluir-perfil/',excluir_perfil, name='excluir_perfil'),
+
 
     path('cardapio/', cardapio, name='cardapio'),
 

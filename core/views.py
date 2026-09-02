@@ -51,6 +51,7 @@ def searchpage(request):
     return render(request, 'core/searchpage.html')
 
 
+
 def cadastro(request):
     if request.method == 'POST':
 
@@ -113,7 +114,33 @@ def cadastro_loja(request):
     # Garante que somente vendedores possam acessar
     if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
+    
+    if request.method == 'POST':
 
+        nome_loja = request.POST.get('nome_loja')
+        descricao_loja = request.POST.get('descricao_loja')
+        telefone = request.POST.get('telefone')
+        endereco = request.POST.get('endereco')
+        foto = request.FILES.get('foto')
+
+        perfil.nome_loja = nome_loja
+        perfil.descricao_loja = descricao_loja
+        perfil.telefone = telefone
+        perfil.endereco = endereco
+
+        if foto:
+            perfil.foto = foto
+
+        perfil.save()
+
+        return redirect('perfilVendedor')
+
+    return render(request, 'core/cadastro_loja.html', {
+        'perfil': perfil
+    })
+
+def editar_produto(request,id):
+    produto = get_object_or_404(Produto,id=id)
     if request.method == 'POST':
 
         nome_loja = request.POST.get('nome_loja')
@@ -162,6 +189,17 @@ def perfilCliente(request):
     })
 
 @login_required
+def excluir_perfil(request):
+
+    if request.method == 'POST':
+        usuario = request.user
+
+        logout(request)
+        usuario.delete()
+        messages.success(request, "Seu perfil foi excluído com sucesso." )
+        return redirect('homepage')
+
+@login_required
 def perfilVendedor(request):
     perfil = request.user.perfil
 
@@ -174,6 +212,7 @@ def perfilVendedor(request):
         'perfil': perfil,
         'produtos': produtos
     })
+
 
 @login_required
 def perfilAdmin(request):
@@ -350,6 +389,7 @@ def cadastrar_produto(request):
     if perfil.tipo != "VENDEDOR":
         return redirect('homepage')
 
+
     if request.method == 'POST':
         nome = request.POST.get('nome')
         descricao = request.POST.get('descricao')
@@ -357,66 +397,19 @@ def cadastrar_produto(request):
         estoque = request.POST.get('estoque')
         imagem = request.FILES.get('imagem')
 
-        # Cria o produto relacionando ao vendedor (perfil)
-        Produto.objects.create(
-            vendedor=perfil,
+        produto = Produto.objects.create(
+
             nome=nome,
             descricao=descricao,
             preco=preco,
             estoque=estoque,
-            imagem=imagem
+            imagem=imagem,
+            vendedor=perfil
         )
         return redirect('perfil_vendedor')
-
+    
     return render(request, 'core/cadastrarProdutos.html')
 
-@login_required
-def editar_loja(request):
-    perfil, _ = Perfil.objects.get_or_create(usuario=request.user)
-
-    if request.method == 'POST':
-        perfil.nome_loja = request.POST.get('nome_loja')
-        perfil.descricao_loja = request.POST.get('descricao_loja')
-        perfil.telefone = request.POST.get('telefone')
-        perfil.endereco = request.POST.get('endereco')
-
-        # Atualiza a foto somente se o usuário tiver selecionado um novo arquivo
-        if request.FILES.get('foto'):
-            perfil.foto = request.FILES.get('foto')
-
-        perfil.save()
-        return redirect('perfil_vendedor')
-
-    return render(request, 'core/editarloja.html', {'perfil': perfil})
-
-def consultar_loja(request, loja_id):
-    loja = get_object_or_404(Perfil, pk=loja_id)
-    produtos = loja.produtos.all()
-
-    return render(request, 'core/minhaloja.html', {
-        'loja': loja,
-        'produtos': produtos
-    })
-
-@login_required
-def perfil_vendedor(request):
-    # Busca o perfil vinculado ao usuário logado
-    perfil, created = Perfil.objects.get_or_create(
-        usuario=request.user,
-        defaults={'tipo': 'VENDEDOR'}  # Caso não exista, define como VENDEDOR
-    )
-
-    # Verifica se o tipo é diferente de VENDEDOR (em maiúsculo!)
-    if perfil.tipo != "VENDEDOR":
-        return redirect('homepage')
-
-    # Busca os produtos onde o campo vendedor é o perfil atual
-    produtos = perfil.produtos.all()
-
-    return render(request, 'core/perfilVendedor.html', {
-        'perfil': perfil,
-        'produtos': produtos
-    })
 
 def sair(request):
     logout(request)
