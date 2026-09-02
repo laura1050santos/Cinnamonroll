@@ -114,8 +114,30 @@ def cadastro_loja(request):
     # Garante que somente vendedores possam acessar
     if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
+    
+    if request.method == 'POST':
 
-    return render(request, 'core/cadastro_loja.html')
+        nome_loja = request.POST.get('nome_loja')
+        descricao_loja = request.POST.get('descricao_loja')
+        telefone = request.POST.get('telefone')
+        endereco = request.POST.get('endereco')
+        foto = request.FILES.get('foto')
+
+        perfil.nome_loja = nome_loja
+        perfil.descricao_loja = descricao_loja
+        perfil.telefone = telefone
+        perfil.endereco = endereco
+
+        if foto:
+            perfil.foto = foto
+
+        perfil.save()
+
+        return redirect('perfilVendedor')
+
+    return render(request, 'core/cadastro_loja.html', {
+        'perfil': perfil
+    })
 
 def editar_produto(request,id):
     produto = get_object_or_404(Produto,id=id)
