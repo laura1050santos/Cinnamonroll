@@ -9,48 +9,11 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
-def get_image(request, obj_id):
-    if not request.session:
-        return HttpResponseForbidden()
-
-    obj = objetos_rep.get_objeto(obj_id)
-
-    if not obj or not obj.photo:
-        return HttpResponse("Imagem não encontrada", status=404)
-
-    photo = obj.photo
-    photo_header = photo[:8]
-
-    # JPEG
-    if photo_header[:2] == b"\xFF\xD8":
-        mime_type = "image/jpeg"
-
-    # PNG
-    elif photo_header[:4] == b"\x89\x50\x4E\x47":
-        mime_type = "image/png"
-
-    # GIF
-    elif photo_header[:6] in (b"GIF87a", b"GIF89a"):
-        mime_type = "image/gif"
-
-    else:
-        return HttpResponse(
-            "Formato de imagem não suportado",
-            status=400
-        )
-
-    return HttpResponse(
-        photo,
-        content_type=mime_type
-    )
-
 def homepage(request):
     return render(request, 'core/homepage.html')
 
 def searchpage(request):
     return render(request, 'core/searchpage.html')
-
-
 
 def cadastro(request):
     if request.method == 'POST':
