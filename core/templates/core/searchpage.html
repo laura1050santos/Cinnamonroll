@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+
+{% block title %}Cinnamonroll - Delivery de Doces das Melhores Confeiteiras{% endblock %}
+{% load static %}
+{% block content %}
+<!-- Barra de Busca -->
+
+<form method="GET" action="{% url 'buscar' %}">
+<div class="search-box">
+
+    <input type="text" name="q" placeholder="Buscar produto...">
+    <button type="submit">    <i class="fa-solid fa-magnifying-glass"></i></button>         
+</div>
+{% for i in produtos  %}
+
+ {{ i.nome }}   
+ {{ i.preco }}
+ {{ i.descricao }}
+
+ {% endfor %}
+ 
+</form>
+
+{% endblock %}
