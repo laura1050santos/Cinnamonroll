@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<div>
+
+    <!-- CABEÇALHO DO PERFIL -->
+    <section>
+
+        <div>
+
+            {% if perfil.foto %}
+                <img src="{{ perfil.foto.url }}" alt="Foto do perfil">
+            {% else %}
+                <div>
+                    👤
+                </div>
+            {% endif %}
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Cliente
+            </span>
+
+            <h1>
+                {% if perfil.usuario.first_name %}
+                    {{ perfil.usuario.first_name }}
+                {% else %}
+                    Meu Perfil
+                {% endif %}
+            </h1>
+
+            <p>
+                Bem-vindo ao seu perfil!
+            </p>
+
+
+            <div>
+
+                <div>
+                    📧
+                    <span>
+                        {{ perfil.usuario.email }}
+                    </span>
+                </div>
+
+
+                {% if perfil.telefone %}
+                    <div>
+                        📞
+                        <span>
+                            {{ perfil.telefone }}
+                        </span>
+                    </div>
+                {% endif %}
+
+
+                {% if perfil.endereco %}
+                    <div>
+                        📍
+                        <span>
+                            {{ perfil.endereco }}
+                        </span>
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <a href="{% url 'cadastro' %}">
+                ✏️ Editar perfil
+            </a>
+            <br>
+<section>
+
+    <h2>Excluir conta</h2>
+
+    <p>
+        Ao excluir sua conta, seus dados serão removidos.
+        Essa ação não pode ser desfeita.
+    </p>
+
+    <form method="POST" action="{% url 'excluir_perfil' %}">
+        {% csrf_token %}
+
+        <button type="submit">
+            🗑️ Excluir minha conta
+        </button>
+    </form>
+
+</section>
+
+
+
+    <!-- AÇÕES DO CLIENTE -->
+    <section>
+
+        <div>
+
+            <h2>
+                Minha conta
+            </h2>
+
+        </div>
+
+
+        <div>
+
+            <a href="{% url 'carrinho' %}">
+                🛒 Meu carrinho
+            </a>
+
+            <br>
+            <a href="#">
+                📦 Meus pedidos
+            </a>
+
+            <br>
+
+            <a href="#">
+                ❤️ Favoritos
+            </a>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}
