@@ -77,10 +77,12 @@
                 {% endif %}
 
             </div>
+            {% if user.is_authenticated and perfil.tipo == "VENDEDOR" and user == perfil.usuario %}
 
             <a href="{% url 'editar_loja' %}" class="botao-editar">
                 Editar loja
             </a>
+            {% endif %}
 
         </div>
 
@@ -100,9 +102,12 @@
                 </p>
             </div>
 <!--conexão do botão-->
+{% if user.is_authenticated and perfil.tipo == "VENDEDOR" and user == perfil.usuario %}
+
 <a href="{% url 'cadastro_produto' %}" class="botao-adicionar">
                 + Cadastrar produto
             </a>
+        {% endif %}
 
         </div>
 

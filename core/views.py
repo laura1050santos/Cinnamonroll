@@ -221,9 +221,7 @@ def perfilVendedor(request, id=None):
     produtos = perfil.produtos.all()
 
     return render(request, 'core/perfilVendedor.html', {
-        'perfil': perfil,
-        'produtos': produtos
-    })
+        'perfil': perfil,'produtos': produtos})
 
 @login_required
 def perfilAdmin(request):

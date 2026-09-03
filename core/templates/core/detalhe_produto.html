@@ -53,19 +53,20 @@
         </div>
 
         {% if produto.estoque > 0 %}
+            {% if perfil.tipo == "cliente" %}
 
             <form
                 method="POST"
                 action="{% url 'adicionar_carrinho' produto.id %}"
-                class="form-carrinho"
-            >
+                class="form-carrinho" >
                 {% csrf_token %}
 
                 <button type="submit" class="btn-carrinho">
                     Adicionar a sacola
                 </button>
-            </form>
 
+            </form>
+            {% endif %}
         {% else %}
 
             <button type="button" class="btn-carrinho btn-desativado" disabled>
