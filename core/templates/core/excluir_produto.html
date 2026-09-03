@@ -1,6 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+<link rel="stylesheet" href="{% static 'perfis.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <h2>Excluir produto</h2>
