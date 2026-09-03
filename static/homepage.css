@@ -1,0 +1,522 @@
+/* =====================================================
+   CINNAMONROLL - PÁGINA INICIAL
+   ===================================================== */
+
+.home-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+
+/* =====================================================
+   SLIDESHOW
+   ===================================================== */
+
+.home-slideshow {
+    position: relative;
+
+    width: 100%;
+    height: 300px;
+
+    margin-top: 30px;
+    margin-bottom: 38px;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    background: #fff0f6;
+
+    box-shadow: 0 8px 25px rgba(62, 88, 108, 0.10);
+}
+
+
+/* Cada slide */
+
+.slide {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: opacity 0.7s ease;
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* Slide ativo */
+
+.slide.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =====================================================
+   IMAGENS DOS SLIDES
+   ===================================================== */
+
+/*
+   COLOQUE AS IMAGENS NA PASTA:
+
+   static/img/
+
+   com estes nomes:
+
+   doce1.jpg
+   doce2.jpg
+   doce3.jpg
+   doce4.jpg
+*/
+
+.slide-1 {
+    background-image: url("/static/img/doce1.jpg");
+}
+
+.slide-2 {
+    background-image: url("/static/img/doce2.jpg");
+}
+
+.slide-3 {
+    background-image: url("/static/img/doce3.jpg");
+}
+
+.slide-4 {
+    background-image: url("/static/img/doce4.jpg");
+}
+
+
+/* =====================================================
+   CAMADA SOBRE A IMAGEM
+   ===================================================== */
+
+.slide-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(35, 53, 70, 0.65),
+            rgba(35, 53, 70, 0.15),
+            rgba(35, 53, 70, 0)
+        );
+}
+
+
+/* =====================================================
+   TEXTO DO SLIDE
+   ===================================================== */
+
+.slide-text {
+    max-width: 560px;
+
+    color: white;
+}
+
+.slide-text span {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    padding: 7px 13px;
+
+    background: rgba(255, 255, 255, 0.90);
+
+    border-radius: 20px;
+
+    color: #df6f9b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.slide-text h2 {
+    margin: 0 0 10px;
+
+    font-size: 34px;
+
+    line-height: 1.15;
+
+    color: white;
+}
+
+.slide-text p {
+    margin: 0;
+
+    font-size: 16px;
+
+    color: white;
+}
+
+
+/* =====================================================
+   SETAS
+   ===================================================== */
+
+.slide-btn {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.90);
+
+    color: #df6f9b;
+
+    font-size: 32px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+.slide-btn:hover {
+    background: white;
+
+    transform: translateY(-50%) scale(1.08);
+}
+
+.slide-prev {
+    left: 18px;
+}
+
+.slide-next {
+    right: 18px;
+}
+
+
+/* =====================================================
+   INDICADORES
+   ===================================================== */
+
+.slide-indicators {
+    position: absolute;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.indicator {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.60);
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.indicator.active {
+    width: 25px;
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+
+/* =====================================================
+   BARRA DE PESQUISA
+   ===================================================== */
+
+.home-page .search-box {
+    width: 100%;
+
+    height: 56px;
+
+    margin: 0 0 28px;
+
+    display: flex;
+    align-items: center;
+
+    background: white;
+
+    border-radius: 30px;
+
+    box-shadow: 0 5px 18px rgba(62, 88, 108, 0.08);
+
+    overflow: hidden;
+}
+
+.home-page .search-box input {
+    flex: 1;
+
+    height: 100%;
+
+    padding: 0 22px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #35516d;
+
+    font-size: 15px;
+}
+
+.home-page .search-box input::placeholder {
+    color: #8a9aaa;
+}
+
+.home-page .search-box button {
+    width: 46px;
+    height: 46px;
+
+    margin-right: 5px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f58bb2;
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.home-page .search-box button:hover {
+    background: #df6f9b;
+
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   BANNER
+   ===================================================== */
+
+.home-page .hero-section {
+    margin-bottom: 36px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background: #f58bb2;
+
+    min-height: 125px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.home-page .hero-content {
+    padding: 30px 45px;
+}
+
+.home-page .hero-content h2 {
+    margin: 0 0 8px;
+
+    color: white;
+
+    font-size: 28px;
+}
+
+.home-page .hero-subtitle {
+    margin: 0;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   CATEGORIAS
+   ===================================================== */
+
+.home-page .categories-section {
+    margin-bottom: 20px;
+}
+
+.home-page .section-header {
+    margin-bottom: 18px;
+}
+
+.home-page .section-title {
+    margin: 0;
+
+    color: #35516d;
+
+    font-size: 22px;
+}
+
+
+/* Grid */
+
+.home-page .categories-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 17px;
+}
+
+
+/* Card */
+
+.home-page .category-card {
+    min-height: 95px;
+
+    background: white;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    box-shadow: 0 4px 14px rgba(62, 88, 108, 0.07);
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.home-page .category-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 20px rgba(62, 88, 108, 0.11);
+}
+
+.home-page .category-card i {
+    color: #f58bb2;
+
+    font-size: 27px;
+}
+
+.home-page .category-card span {
+    color: #35516d;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .home-page {
+        width: 92%;
+    }
+
+    .home-page .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .home-slideshow {
+        height: 280px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .home-page {
+        width: 92%;
+    }
+
+    .home-slideshow {
+        height: 250px;
+
+        margin-top: 20px;
+    }
+
+    .slide-overlay {
+        padding: 25px;
+    }
+
+    .slide-text h2 {
+        font-size: 25px;
+    }
+
+    .slide-text p {
+        font-size: 14px;
+    }
+
+    .slide-btn {
+        width: 35px;
+        height: 35px;
+
+        font-size: 25px;
+    }
+
+    .home-page .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-page .hero-content {
+        padding: 25px;
+    }
+
+    .home-page .hero-content h2 {
+        font-size: 23px;
+    }
+
+}

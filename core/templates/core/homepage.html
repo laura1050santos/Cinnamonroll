@@ -1,132 +1,300 @@
 {% extends 'core/base.html' %}
 
-
-{% block title %}Cinnamonroll - Delivery de Doces das Melhores Confeiteiras{% endblock %}
 {% load static %}
+
+{% block title %}
+Cinnamonroll - Delivery de Doces das Melhores Confeiteiras
+{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+
+{% endblock %}
+
+
 {% block content %}
-<!-- Barra de Busca -->
-<div class="search-box">
-    <input type="text" placeholder="Buscar docerias, bolos ou confeiteiras...">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-</div>
 
-<!-- Banner Principal de Boas-Vindas -->
-<section class="hero-section">
-    <div class="hero-content">
-        <h2>As melhores docerias perto de você! </h2>
-        <p class="hero-subtitle">Conectamos você às confeiteiras mais talentosas da cidade.</p>
-    </div>
-</section>
+<div class="home-page">
 
-<!-- Categorias -->
-<section class="categories-section">
-    <div class="section-header">
-        <h3 class="section-title">Categorias</h3>
-    </div>
-    <div class="categories-grid">
-        <div class="category-card">
-            <i class="fa-solid fa-store"></i>
-            <span>Lojas</span>
-        </div>
-        <div class="category-card">
-            <i class="fa-solid fa-cookie-bite"></i>
-            <span>Cookies</span>
-        </div>
-        <div class="category-card">
-            <i class="fa-solid fa-cake-candles"></i>
-            <span>Bolos</span>
-        </div>
-        <div class="category-card">
-            <i class="fa-solid fa-ice-cream"></i>
-            <span>Sorvetes</span>
-        </div>
-        <div class="category-card">
-            <i class="fa-solid fa-mug-hot"></i>
-            <span>Cafés</span>
-        </div>
-    </div>
-</section>
+    <!-- =========================================
+         SLIDESHOW
+         ========================================= -->
 
-<!-- Filtros Rápidos de Vendedores -->
-<div class="filters-bar">
-    <button class="filter-chip active">Todas as lojas</button>
-    <button class="filter-chip"><i class="fa-solid fa-star"></i> Super Confeiteiras</button>
-    <button class="filter-chip"><i class="fa-solid fa-clock"></i> Retire em até 30 min</button>
-</div>
+    <section class="home-slideshow">
 
-<!-- Lista de Confeiteiras / Lojas Parceiras -->
-<section class="stores-section">
-    <div class="section-header">
-        <h3 class="section-title">Docerias na sua região 🍰</h3>
-    </div>
-    
-    <div class="stores-grid">
-        <!-- Card Loja 1 -->
-        <a href="#" class="store-card">
-            <div class="store-logo">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-            <div class="store-info">
-                <h4>Confeitaria Doce Sonho</h4>
-                <div class="store-meta">
-                    <span class="rating">★ 4.9</span>
-                    <span class="dot">•</span>
-                    <span>Bolos & Doces</span>
-                    <span class="dot">•</span>
-                    <span>1.2 km</span>
-                </div>
-                <div class="store-meta">
-                    <span>25-35 min</span>
-                    <span class="dot">•</span>
-                    <span style="color: #27ae60;">Grátis</span>
+        <div class="slide slide-1">
+            <div class="slide-overlay">
+                <div class="slide-text">
+                    <span>🍥 Feito com carinho</span>
+                    <h2>Doces que deixam o dia mais gostoso!</h2>
+                    <p>Encontre seus doces favoritos no Cinnamonroll.</p>
                 </div>
             </div>
-        </a>
+        </div>
 
-        <!-- Card Loja 2 -->
-        <a href="#" class="store-card">
-            <div class="store-logo">
-                <i class="fa-solid fa-cookie"></i>
-            </div>
-            <div class="store-info">
-                <h4>Cinnamon & Co.</h4>
-                <div class="store-meta">
-                    <span class="rating">★ 4.8</span>
-                    <span class="dot">•</span>
-                    <span>Cookies & Drinks</span>
-                    <span class="dot">•</span>
-                    <span>2.5 km</span>
-                </div>
-                <div class="store-meta">
-                    <span>40-50 min</span>
-                    <span class="dot">•</span>
-                    <span>R$ 5,00</span>
+        <div class="slide slide-2">
+            <div class="slide-overlay">
+                <div class="slide-text">
+                    <span>🍰 Uma pausa deliciosa</span>
+                    <h2>Seu doce favorito está esperando por você!</h2>
+                    <p>Descubra bolos, cookies, cupcakes e muito mais.</p>
                 </div>
             </div>
-        </a>
+        </div>
 
-        <!-- Card Loja 3 -->
-        <a href="#" class="store-card">
-            <div class="store-logo">
+        <div class="slide slide-3">
+            <div class="slide-overlay">
+                <div class="slide-text">
+                    <span>🍪 Feito pelas melhores confeiteiras</span>
+                    <h2>Pequenos doces, grandes momentos.</h2>
+                    <p>Conheça os produtos das nossas lojas parceiras.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide-4">
+            <div class="slide-overlay">
+                <div class="slide-text">
+                    <span>🧁 Para adoçar seu dia</span>
+                    <h2>Escolha, peça e aproveite!</h2>
+                    <p>Seu próximo doce preferido pode estar aqui.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SETAS -->
+
+        <button class="slide-btn slide-prev" type="button">
+            ‹
+        </button>
+
+        <button class="slide-btn slide-next" type="button">
+            ›
+        </button>
+
+
+        <!-- INDICADORES -->
+
+        <div class="slide-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         BARRA DE BUSCA
+         ========================================= -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Buscar docerias, bolos ou confeiteiras..."
+        >
+
+        <button type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================================
+         BANNER PRINCIPAL
+         ========================================= -->
+
+    <section class="hero-section">
+
+        <div class="hero-content">
+
+            <h2>
+                As melhores docerias perto de você!
+            </h2>
+
+            <p class="hero-subtitle">
+                Conectamos você às confeiteiras mais talentosas da cidade.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CATEGORIAS
+         ========================================= -->
+
+    <section class="categories-section">
+
+        <div class="section-header">
+
+            <h3 class="section-title">
+                Categorias
+            </h3>
+
+        </div>
+
+
+        <div class="categories-grid">
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-store"></i>
+
+                <span>
+                    Lojas
+                </span>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-cookie-bite"></i>
+
+                <span>
+                    Cookies
+                </span>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-cake-candles"></i>
+
+                <span>
+                    Bolos
+                </span>
+
+            </div>
+
+
+            <div class="category-card">
+
                 <i class="fa-solid fa-ice-cream"></i>
+
+                <span>
+                    Sorvetes
+                </span>
+
             </div>
-            <div class="store-info">
-                <h4>Gelateria da Nuvem</h4>
-                <div class="store-meta">
-                    <span class="rating">★ 5.0</span>
-                    <span class="dot">•</span>
-                    <span>Sorvetes Artesanais</span>
-                    <span class="dot">•</span>
-                    <span>0.8 km</span>
-                </div>
-                <div class="store-meta">
-                    <span>15-25 min</span>
-                    <span class="dot">•</span>
-                    <span style="color: #27ae60;">Grátis</span>
-                </div>
+
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                <span>
+                    Cafés
+                </span>
+
             </div>
-        </a>
-    </div>
-</section>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT DO SLIDESHOW
+     ========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slides = document.querySelectorAll(".slide");
+    const indicators = document.querySelectorAll(".indicator");
+
+    const nextButton = document.querySelector(".slide-next");
+    const prevButton = document.querySelector(".slide-prev");
+
+    let currentSlide = 0;
+
+
+    function showSlide(index) {
+
+        if (index >= slides.length) {
+            currentSlide = 0;
+        }
+
+        if (index < 0) {
+            currentSlide = slides.length - 1;
+        }
+
+        slides.forEach(function(slide) {
+            slide.classList.remove("active");
+        });
+
+        indicators.forEach(function(indicator) {
+            indicator.classList.remove("active");
+        });
+
+
+        slides[currentSlide].classList.add("active");
+        indicators[currentSlide].classList.add("active");
+
+    }
+
+
+    nextButton.addEventListener("click", function () {
+
+        currentSlide++;
+
+        showSlide(currentSlide);
+
+    });
+
+
+    prevButton.addEventListener("click", function () {
+
+        currentSlide--;
+
+        showSlide(currentSlide);
+
+    });
+
+
+    indicators.forEach(function(indicator, index) {
+
+        indicator.addEventListener("click", function () {
+
+            currentSlide = index;
+
+            showSlide(currentSlide);
+
+        });
+
+    });
+
+
+    /* Troca automática */
+
+    setInterval(function () {
+
+        currentSlide++;
+
+        showSlide(currentSlide);
+
+    }, 5000);
+
+
+    showSlide(currentSlide);
+
+});
+
+</script>
 
 {% endblock %}
