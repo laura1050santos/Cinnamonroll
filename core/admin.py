@@ -1,15 +1,16 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
-
-
-cliente_group, _ = Group.objects.get_or_create(
-    name="Clientes"
+from .models import (
+    Perfil,
+    Produto,
+    Carrinho,
+    ItemCarrinho,
+    Pedido,
+    ItemPedido
 )
 
-vendedor_group, _ = Group.objects.get_or_create(
-    name="Vendedores"
-)
-
-admin_group, _ = Group.objects.get_or_create(
-    name="Administradores"
-)
+admin.site.register(Perfil)
+admin.site.register(Produto)
+admin.site.register(Carrinho)
+admin.site.register(ItemCarrinho)
+admin.site.register(Pedido)
+admin.site.register(ItemPedido)
