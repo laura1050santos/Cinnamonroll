@@ -9,60 +9,11 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
-def get_image(request, obj_id):
-    if not request.session:
-        return HttpResponseForbidden()
-
-    obj = objetos_rep.get_objeto(obj_id)
-
-    if not obj or not obj.photo:
-        return HttpResponse("Imagem não encontrada", status=404)
-
-    photo = obj.photo
-    photo_header = photo[:8]
-
-    # JPEG
-    if photo_header[:2] == b"\xFF\xD8":
-        mime_type = "image/jpeg"
-
-    # PNG
-    elif photo_header[:4] == b"\x89\x50\x4E\x47":
-        mime_type = "image/png"
-
-    # GIF
-    elif photo_header[:6] in (b"GIF87a", b"GIF89a"):
-        mime_type = "image/gif"
-
-    else:
-        return HttpResponse(
-            "Formato de imagem não suportado",
-            status=400
-        )
-
-    return HttpResponse(
-        photo,
-        content_type=mime_type
-    )
-
 def homepage(request):
     return render(request, 'core/homepage.html')
 
 def searchpage(request):
-
     return render(request, 'core/searchpage.html')
-    
-def buscar(request):
-    termo = request.GET.get('q', '').strip()
-
-    produtos = Produto.objects.all()
-
-    if termo:
-        produtos = produtos.filter(nome__icontains=termo)
-
-    return render(request, 'core/searchpage.html', {
-        'produtos': produtos,
-        'termo': termo
-    })
 
 def cadastro(request):
     if request.method == 'POST':
@@ -126,30 +77,8 @@ def cadastro_loja(request):
     # Garante que somente vendedores possam acessar
     if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
-    
-    if request.method == 'POST':
 
-        nome_loja = request.POST.get('nome_loja')
-        descricao_loja = request.POST.get('descricao_loja')
-        telefone = request.POST.get('telefone')
-        endereco = request.POST.get('endereco')
-        foto = request.FILES.get('foto')
-
-        perfil.nome_loja = nome_loja
-        perfil.descricao_loja = descricao_loja
-        perfil.telefone = telefone
-        perfil.endereco = endereco
-
-        if foto:
-            perfil.foto = foto
-
-        perfil.save()
-
-        return redirect('perfilVendedor')
-
-    return render(request, 'core/cadastro_loja.html', {
-        'perfil': perfil
-    })
+    return render(request, 'core/cadastro_loja.html')
 
 def editar_produto(request,id):
     produto = get_object_or_404(Produto,id=id)
@@ -244,12 +173,6 @@ def perfilVendedor(request):
         'produtos': produtos
     })
 
-# core/views.py
-
-@login_required
-def editar_loja(request):
-    # Insira a lógica de edição da loja aqui
-    return render(request, 'core/editarloja.html')
 
 @login_required
 def perfilAdmin(request):
@@ -417,31 +340,32 @@ def adicionar_carrinho(request, id):
 
     return redirect('carrinho')
 
-#cadastro de produtos pelo vendedor
-
-
-# core/views.py
-
 @login_required
-def cadastrar_produto(request):
-    perfil, _ = Perfil.objects.get_or_create(usuario=request.user)
+def cadastro_produto(request):
+    perfil = request.user.perfil
 
-    if perfil.tipo != "VENDEDOR":
+    if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
-
+    
     if request.method == 'POST':
-        Produto.objects.create(
-            vendedor=perfil,
-            nome=request.POST.get('nome'),
-            descricao=request.POST.get('descricao'),
-            preco=request.POST.get('preco'),
-            estoque=request.POST.get('estoque'),
-            imagem=request.FILES.get('imagem')
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
+        preco = request.POST.get('preco')
+        estoque = request.POST.get('estoque')
+        imagem = request.FILES.get('imagem')
+
+        produto = Produto.objects.create(
+            nome=nome,
+            descricao=descricao,
+            preco=preco,
+            estoque=estoque,
+            imagem=imagem,
+            vendedor=perfil
         )
+
         return redirect('perfilVendedor')
-
-    return render(request, 'core/cadastrarProdutos.html')
-
+    
+    return render(request, 'core/cadastro_produto.html')
 
 
 def sair(request):
