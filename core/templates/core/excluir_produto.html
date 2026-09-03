@@ -13,11 +13,11 @@
 <form method="POST">
     {% csrf_token %}
 
-    <button type="submit">
+    <button type="submit" class="botao-adicionar">
         Sim, excluir
     </button>
 
-    <a href="{% url 'perfilVendedor' %}">
+    <a href="{% url 'perfilVendedor' %}" class="botao-adicionar">
         Cancelar
     </a>
 </form>

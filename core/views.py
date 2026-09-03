@@ -131,30 +131,44 @@ def cadastro_loja(request):
         return redirect('perfilVendedor')
     return render(request, 'core/cadastro_loja.html')
 
-def editar_produto(request,id):
-    produto = get_object_or_404(Produto,id=id)
+@login_required
+def editar_produto(request, id):
+
+    perfil = request.user.perfil
+
+    # Apenas vendedores podem editar produtos
+    if perfil.tipo != "VENDEDOR":
+        return redirect('homepage')
+
+    # Só permite editar produtos do vendedor logado
+    produto = get_object_or_404(
+        Produto,
+        id=id,
+        vendedor=perfil
+    )
+
     if request.method == 'POST':
 
-        nome_loja = request.POST.get('nome_loja')
-        descricao_loja = request.POST.get('descricao_loja')
-        telefone = request.POST.get('telefone')
-        endereco = request.POST.get('endereco')
-        foto = request.FILES.get('foto')
+        produto.nome = request.POST.get('nome')
+        produto.descricao = request.POST.get('descricao')
+        produto.preco = request.POST.get('preco')
+        produto.estoque = request.POST.get('estoque')
 
-        perfil.nome_loja = nome_loja
-        perfil.descricao_loja = descricao_loja
-        perfil.telefone = telefone
-        perfil.endereco = endereco
+        # Só altera a imagem se uma nova foi enviada
+        if 'imagem' in request.FILES:
+            produto.imagem = request.FILES['imagem']
 
-        if foto:
-            perfil.foto = foto
+        produto.save()
 
-        perfil.save()
+        messages.success(
+            request,
+            'Produto atualizado com sucesso!'
+        )
 
         return redirect('perfilVendedor')
 
-    return render(request, 'core/cadastro_loja.html', {
-        'perfil': perfil
+    return render(request, 'core/editar_produto.html', {
+        'produto': produto
     })
 
 @login_required

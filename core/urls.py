@@ -50,6 +50,11 @@ urlpatterns = [
         name='excluir_produto'
     ),
 
+    path(
+        'produto/<int:id>/editar/',
+        editar_produto,
+        name='editar_produto'
+    ),
 
     path(
         'carrinho/',
