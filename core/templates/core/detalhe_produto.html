@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ produto.nome }} - Cinnamonroll{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'produto.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="produto-detalhe">
+
+    <div class="produto-detalhe-imagem">
+        {% if produto.imagem %}
+            <img
+                src="{{ produto.imagem.url }}"
+                alt="{{ produto.nome }}"
+            >
+        {% else %}
+            <div class="produto-sem-imagem">
+                🍰
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="produto-detalhe-info">
+
+        <span class="produto-badge">Produto</span>
+
+        <h1>{{ produto.nome }}</h1>
+
+        {% if produto.descricao %}
+            <p class="produto-descricao">
+                {{ produto.descricao }}
+            </p>
+        {% endif %}
+
+        <div class="produto-preco">
+            R$ {{ produto.preco|floatformat:2 }}
+        </div>
+
+        <div class="produto-estoque">
+            {% if produto.estoque > 0 %}
+                <span class="estoque-disponivel">
+                    ✓ {{ produto.estoque }} disponível{{ produto.estoque|pluralize }}
+                </span>
+            {% else %}
+                <span class="estoque-esgotado">
+                    Produto esgotado
+                </span>
+            {% endif %}
+        </div>
+
+        {% if produto.estoque > 0 %}
+
+            <form
+                method="POST"
+                action="{% url 'adicionar_carrinho' produto.id %}"
+                class="form-carrinho"
+            >
+                {% csrf_token %}
+
+                <button type="submit" class="btn-carrinho">
+                    Adicionar a sacola
+                </button>
+            </form>
+
+        {% else %}
+
+            <button type="button" class="btn-carrinho btn-desativado" disabled>
+                Produto esgotado
+            </button>
+
+        {% endif %}
+
+        <a href="{% url 'cardapio' %}" class="btn-voltar">
+            ← Voltar para o cardápio
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

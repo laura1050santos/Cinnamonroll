@@ -10,7 +10,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
 def homepage(request):
-    return render(request, 'core/homepage.html')
+    lojas = Perfil.objects.filter(tipo="VENDEDOR")
+    return render(request, 'core/homepage.html', {'lojas': lojas})
 
 def searchpage(request):
     query = request.GET.get('q', '').strip()
@@ -222,7 +223,9 @@ def perfilAdmin(request):
 
 @login_required
 def cardapio(request):
-    return render(request, 'core/cardapio.html')
+    produtos = Produto.objects.all()
+
+    return render(request, 'core/cardapio.html', {'produtos': produtos})
 
 @login_required
 def produto(request, id):
@@ -404,6 +407,14 @@ def cadastro_produto(request):
         return redirect('perfilVendedor')
     
     return render(request, 'core/cadastro_produto.html')
+
+@login_required
+def detalhe_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+
+    return render(request, 'core/detalhe_produto.html', {
+        'produto': produto
+    })
 
 @login_required
 def editar_loja(request):

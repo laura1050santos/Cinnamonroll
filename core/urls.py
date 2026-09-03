@@ -34,11 +34,13 @@ urlpatterns = [
 
     path('cardapio/', cardapio, name='cardapio'),
 
-    path(
-        'produto/<int:id>/',
-        produto,
-        name='produto'
-    ),
+    #path(
+        #'produto/<int:id>/',
+        #produto,
+       # name='produto'
+    #),
+
+    path('produto/<int:id>/', views.detalhe_produto, name='detalhe_produto'),
 
     path(
         'carrinho/',

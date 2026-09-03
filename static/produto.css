@@ -1,0 +1,223 @@
+/* ================================
+   DETALHE DO PRODUTO
+================================ */
+
+.produto-detalhe {
+    width: min(1100px, 90%);
+    margin: 60px auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+
+/* ================================
+   IMAGEM
+================================ */
+
+.produto-detalhe-imagem {
+    width: 100%;
+    height: 500px;
+
+    border-radius: 20px;
+    overflow: hidden;
+
+    background: #fff0f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produto-detalhe-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.produto-sem-imagem {
+    font-size: 90px;
+}
+
+
+/* ================================
+   INFORMAÇÕES
+================================ */
+
+.produto-detalhe-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.produto-badge {
+    display: inline-block;
+
+    padding: 6px 14px;
+    margin-bottom: 15px;
+
+    border-radius: 20px;
+
+    background: #ffe0eb;
+    color: #c45b7c;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.produto-detalhe-info h1 {
+    margin: 0 0 20px;
+
+    font-size: 38px;
+    line-height: 1.2;
+
+    color: #d45d83;
+}
+
+.produto-descricao {
+    margin: 0 0 25px;
+
+    color: #777;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   PREÇO
+================================ */
+
+.produto-preco {
+    margin-bottom: 12px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #e05b87;
+}
+
+
+/* ================================
+   ESTOQUE
+================================ */
+
+.produto-estoque {
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.estoque-disponivel {
+    color: #65a276;
+    font-weight: 600;
+}
+
+.estoque-esgotado {
+    color: #d05c6f;
+    font-weight: 600;
+}
+
+
+/* ================================
+   BOTÃO CARRINHO
+================================ */
+
+.form-carrinho {
+    width: 100%;
+}
+
+.btn-carrinho {
+    width: 100%;
+
+    padding: 15px 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #e88aa8;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.btn-carrinho:hover {
+    background: #d96f91;
+    transform: translateY(-2px);
+}
+
+.btn-carrinho:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   BOTÃO DESATIVADO
+================================ */
+
+.btn-desativado {
+    background: #d8d8d8;
+    cursor: not-allowed;
+}
+
+.btn-desativado:hover {
+    background: #d8d8d8;
+    transform: none;
+}
+
+
+/* ================================
+   VOLTAR
+================================ */
+
+.btn-voltar {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 12px;
+    padding: 13px 20px;
+
+    border: 1px solid #f0b8ca;
+    border-radius: 12px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: #d45d83;
+    background: #fff7fa;
+
+    transition: all 0.2s ease;
+}
+
+.btn-voltar:hover {
+    background: #ffeaf1;
+    border-color: #e88aa8;
+}
+
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media (max-width: 800px) {
+
+    .produto-detalhe {
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+        margin: 30px auto;
+    }
+
+    .produto-detalhe-imagem {
+        height: 350px;
+    }
+
+    .produto-detalhe-info h1 {
+        font-size: 30px;
+    }
+}
