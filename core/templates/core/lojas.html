@@ -1,0 +1,125 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Lojas - Cinnamonroll
+{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'lojas.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="lojas-page">
+
+    <div class="lojas-header">
+
+        <a href="{% url 'homepage' %}" class="voltar">
+            ← Voltar
+        </a>
+
+        <h1>Lojas 🍰</h1>
+
+        <p>
+            Conheça as lojas e confeiteiras do Cinnamonroll.
+        </p>
+
+    </div>
+
+
+    {% if lojas %}
+
+        <div class="lojas-grid">
+
+            {% for loja in lojas %}
+
+                <a
+                    href="{% url 'perfilVendedor_id' loja.id %}"
+                    class="loja-card"
+                >
+
+                    <div class="loja-imagem">
+
+                        {% if loja.foto %}
+
+                            <img
+                                src="{{ loja.foto.url }}"
+                                alt="{{ loja.nome_loja }}"
+                            >
+
+                        {% else %}
+
+                            <div class="loja-sem-imagem">
+                                🍰
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="loja-info">
+
+                        <h2>
+                            {{ loja.nome_loja }}
+                        </h2>
+
+                        {% if loja.descricao_loja %}
+
+                            <p>
+                                {{ loja.descricao_loja }}
+                            </p>
+
+                        {% else %}
+
+                            <p>
+                                Confira os doces dessa loja!
+                            </p>
+
+                        {% endif %}
+
+                        <span class="ver-loja">
+                            Ver loja →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <div class="sem-lojas">
+
+            <div class="sem-lojas-icon">
+                🧁
+            </div>
+
+            <h2>
+                Ainda não temos lojas cadastradas
+            </h2>
+
+            <p>
+                Em breve teremos novas docerias por aqui!
+            </p>
+
+            <a href="{% url 'homepage' %}">
+                Voltar para o início
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

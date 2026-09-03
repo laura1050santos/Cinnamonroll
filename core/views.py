@@ -13,6 +13,18 @@ def homepage(request):
     lojas = Perfil.objects.filter(tipo="VENDEDOR")
     return render(request, 'core/homepage.html', {'lojas': lojas})
 
+def lojas(request):
+
+    lojas = Perfil.objects.filter(
+        tipo="VENDEDOR"
+    ).exclude(
+        nome_loja=""
+    )
+
+    return render(request, 'core/lojas.html', {
+        'lojas': lojas
+    })
+
 def searchpage(request):
     query = request.GET.get('q', '').strip()
     produtos = []

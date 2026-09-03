@@ -6,6 +6,7 @@ from core import views
 
 urlpatterns = [
     path('', homepage, name='homepage'),
+    path('lojas/', lojas, name='lojas'),
     path('searchpage/', searchpage, name='searchpage'),
 
     path(
@@ -24,7 +25,8 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('perfilCliente/', perfilCliente, name='perfilCliente'),
     path('perfilCliente/editar/', views.editar_perfil, name='editar_perfil_cliente'), 
-    path('perfilVendedor/<int:id>/', perfilVendedor, name='perfilVendedor'),
+    path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
+    path('perfilVendedor/<int:id>/', perfilVendedor, name='perfilVendedor_id'),
     path('perfilVendedor/editar', views.editar_perfil, name='editar_perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
     path('excluir-perfil/',excluir_perfil, name='excluir_perfil'),
