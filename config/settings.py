@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,3 +139,9 @@ MAILERS = {
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'homepage'
 LOGOUT_REDIRECT_URL = '/'
+
+# URL que o HTML usará para acessar a imagem (ex: /media/produtos/foto.jpg)
+MEDIA_URL = '/media/'
+
+# Caminho físico da pasta no seu computador onde as imagens serão salvas
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
