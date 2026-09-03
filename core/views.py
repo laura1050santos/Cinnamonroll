@@ -158,6 +158,37 @@ def editar_produto(request,id):
     })
 
 @login_required
+def excluir_produto(request, id):
+
+    perfil = request.user.perfil
+
+    # Apenas vendedores podem excluir produtos
+    if perfil.tipo != "VENDEDOR":
+        return redirect('homepage')
+
+    # Só encontra o produto se ele pertencer ao vendedor logado
+    produto = get_object_or_404(
+        Produto,
+        id=id,
+        vendedor=perfil
+    )
+
+    if request.method == "POST":
+        produto.delete()
+
+        messages.success(
+            request,
+            "Produto excluído com sucesso!"
+        )
+
+        return redirect('perfilVendedor')
+
+    return render(request, 'core/excluir_produto.html', {
+        'produto': produto
+    })
+
+
+@login_required
 def dashboard(request):
     perfil = request.user.perfil
 

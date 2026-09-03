@@ -121,6 +121,10 @@
                     {% for produto in produtos %}
 
                         {% include 'core/componentes/card_produto.html' %}
+                    
+                        <a href="{% url 'excluir_produto' produto.id %}">
+                            Excluir
+                        </a>
 
                     {% endfor %}
 

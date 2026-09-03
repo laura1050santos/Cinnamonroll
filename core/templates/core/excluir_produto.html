@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Excluir produto</h2>
+
+<p>
+    Tem certeza que deseja excluir o produto
+    <strong>{{ produto.nome }}</strong>?
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <button type="submit">
+        Sim, excluir
+    </button>
+
+    <a href="{% url 'perfilVendedor' %}">
+        Cancelar
+    </a>
+</form>
+
+{% endblock %}
+```

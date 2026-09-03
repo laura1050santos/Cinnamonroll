@@ -45,6 +45,13 @@ urlpatterns = [
     path('produto/<int:id>/', views.detalhe_produto, name='produto'),
 
     path(
+        'produto/<int:id>/excluir/',
+        excluir_produto,
+        name='excluir_produto'
+    ),
+
+
+    path(
         'carrinho/',
         carrinho,
         name='carrinho'
