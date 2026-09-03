@@ -397,6 +397,7 @@
 }
 
 
+
 /* Grid */
 
 .home-page .categories-grid {
@@ -434,6 +435,7 @@
     transition: all 0.2s ease;
 }
 
+
 .home-page .category-card:hover {
     transform: translateY(-4px);
 
@@ -454,6 +456,26 @@
     font-weight: 600;
 }
 
+/* =====================================================
+   LINKS DAS CATEGORIAS
+   ===================================================== */
+
+.home-page .category-card,
+.home-page .category-card:link,
+.home-page .category-card:visited,
+.home-page .category-card:hover,
+.home-page .category-card:active {
+    text-decoration: none !important;
+    color: inherit;
+    border: none !important;
+    border-bottom: none !important;
+}
+
+.home-page .category-card i,
+.home-page .category-card span {
+    text-decoration: none !important;
+    border: none !important;
+}
 
 /* =====================================================
    RESPONSIVO
@@ -518,5 +540,6 @@
     .home-page .hero-content h2 {
         font-size: 23px;
     }
+
 
 }

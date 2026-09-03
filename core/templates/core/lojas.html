@@ -3,12 +3,420 @@
 {% load static %}
 
 {% block title %}
-Lojas - Cinnamonroll
+    Lojas - Cinnamonroll
 {% endblock %}
+
 
 {% block head %}
 
-<link rel="stylesheet" href="{% static 'lojas.css' %}">
+<style>
+
+    /* ==========================================
+       PÁGINA DE LOJAS
+       ========================================== */
+
+    .lojas-page {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 35px 0 70px;
+    }
+
+
+    /* ==========================================
+       CABEÇALHO
+       ========================================== */
+
+    .lojas-header {
+        margin-bottom: 35px;
+    }
+
+    .lojas-header h1 {
+        margin: 15px 0 8px;
+        color: #35516d;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .lojas-header p {
+        margin: 0;
+        color: #71859a;
+        font-size: 15px;
+    }
+
+
+    /* ==========================================
+       BOTÃO VOLTAR
+       ========================================== */
+
+    .voltar {
+        display: inline-block;
+
+        color: #df6f9b !important;
+
+        text-decoration: none !important;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+    .voltar:hover {
+        color: #c95783 !important;
+
+        text-decoration: none !important;
+
+        transform: translateX(-3px);
+    }
+
+
+    /* ==========================================
+       GRID DAS LOJAS
+       ========================================== */
+
+    .lojas-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 22px;
+    }
+
+
+    /* ==========================================
+       CARD DA LOJA
+       ========================================== */
+
+    .loja-card {
+        display: block;
+
+        overflow: hidden;
+
+        background: white;
+
+        border-radius: 20px;
+
+        text-decoration: none !important;
+
+        color: inherit !important;
+
+        border: none !important;
+
+        outline: none;
+
+        box-shadow:
+            0 5px 18px rgba(62, 88, 108, 0.08);
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+
+    /* Remove estilo padrão do link */
+
+    .loja-card:link,
+    .loja-card:visited,
+    .loja-card:hover,
+    .loja-card:active,
+    .loja-card:focus {
+
+        text-decoration: none !important;
+
+        color: inherit !important;
+
+        border: none !important;
+
+        outline: none;
+    }
+
+
+    /* Efeito ao passar o mouse */
+
+    .loja-card:hover {
+
+        transform: translateY(-6px);
+
+        box-shadow:
+            0 12px 28px rgba(62, 88, 108, 0.14);
+    }
+
+
+    /* ==========================================
+       IMAGEM
+       ========================================== */
+
+    .loja-imagem {
+
+        width: 100%;
+
+        height: 190px;
+
+        background: #fff0f6;
+
+        overflow: hidden;
+    }
+
+
+    .loja-imagem img {
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        display: block;
+
+        border: none;
+    }
+
+
+    /* ==========================================
+       SEM IMAGEM
+       ========================================== */
+
+    .loja-sem-imagem {
+
+        width: 100%;
+
+        height: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #fff0f6;
+
+        font-size: 60px;
+    }
+
+
+    /* ==========================================
+       INFORMAÇÕES DA LOJA
+       ========================================== */
+
+    .loja-info {
+
+        padding: 20px;
+    }
+
+
+    .loja-info h2 {
+
+        margin: 0 0 8px;
+
+        color: #35516d;
+
+        font-size: 20px;
+
+        font-weight: 700;
+    }
+
+
+    .loja-info p {
+
+        margin: 0 0 15px;
+
+        color: #7c8d9d;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+
+        display: -webkit-box;
+
+        -webkit-line-clamp: 2;
+
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+    }
+
+
+    /* ==========================================
+       VER LOJA
+       ========================================== */
+
+    .ver-loja {
+
+        display: inline-block;
+
+        color: #df6f9b !important;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        text-decoration: none !important;
+
+        transition: 0.2s ease;
+    }
+
+
+    .loja-card:hover .ver-loja {
+
+        color: #c95783 !important;
+    }
+
+
+    /* ==========================================
+       GARANTE QUE NADA DENTRO DO CARD
+       FIQUE COM SUBLINHADO
+       ========================================== */
+
+    .loja-card *,
+    .loja-card *:hover {
+
+        text-decoration: none !important;
+    }
+
+
+    /* ==========================================
+       QUANDO NÃO EXISTEM LOJAS
+       ========================================== */
+
+    .sem-lojas {
+
+        background: white;
+
+        border-radius: 22px;
+
+        padding: 60px 30px;
+
+        text-align: center;
+
+        box-shadow:
+            0 5px 18px rgba(62, 88, 108, 0.08);
+    }
+
+
+    .sem-lojas-icon {
+
+        font-size: 60px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .sem-lojas h2 {
+
+        margin: 0 0 10px;
+
+        color: #35516d;
+
+        font-size: 23px;
+
+        font-weight: 700;
+    }
+
+
+    .sem-lojas p {
+
+        color: #7c8d9d;
+
+        margin-bottom: 25px;
+    }
+
+
+    .sem-lojas a {
+
+        display: inline-block;
+
+        padding: 11px 22px;
+
+        border-radius: 25px;
+
+        background: #f58bb2;
+
+        color: white !important;
+
+        text-decoration: none !important;
+
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+
+    .sem-lojas a:hover {
+
+        background: #df6f9b;
+
+        color: white !important;
+
+        text-decoration: none !important;
+    }
+
+
+    /* ==========================================
+       RESPONSIVO - TABLET
+       ========================================== */
+
+    @media (max-width: 900px) {
+
+        .lojas-page {
+
+            width: 92%;
+        }
+
+        .lojas-grid {
+
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+
+    /* ==========================================
+       RESPONSIVO - CELULAR
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+        .lojas-page {
+
+            width: 92%;
+
+            padding-top: 25px;
+        }
+
+
+        .lojas-header h1 {
+
+            font-size: 28px;
+        }
+
+
+        .lojas-grid {
+
+            grid-template-columns: 1fr;
+
+            gap: 18px;
+        }
+
+
+        .loja-imagem {
+
+            height: 210px;
+        }
+
+
+        .loja-info {
+
+            padding: 18px;
+        }
+
+
+        .loja-info h2 {
+
+            font-size: 19px;
+        }
+    }
+
+</style>
 
 {% endblock %}
 
@@ -17,13 +425,21 @@ Lojas - Cinnamonroll
 
 <div class="lojas-page">
 
+
+    <!-- CABEÇALHO -->
+
     <div class="lojas-header">
 
-        <a href="{% url 'homepage' %}" class="voltar">
+        <a
+            href="{% url 'homepage' %}"
+            class="voltar"
+        >
             ← Voltar
         </a>
 
-        <h1>Lojas 🍰</h1>
+        <h1>
+            Lojas 🍰
+        </h1>
 
         <p>
             Conheça as lojas e confeiteiras do Cinnamonroll.
@@ -34,14 +450,23 @@ Lojas - Cinnamonroll
 
     {% if lojas %}
 
+
+        <!-- GRID DE LOJAS -->
+
         <div class="lojas-grid">
 
             {% for loja in lojas %}
+
+
+                <!-- CARD DA LOJA -->
 
                 <a
                     href="{% url 'perfilVendedor_id' loja.id %}"
                     class="loja-card"
                 >
+
+
+                    <!-- IMAGEM -->
 
                     <div class="loja-imagem">
 
@@ -63,11 +488,14 @@ Lojas - Cinnamonroll
                     </div>
 
 
+                    <!-- INFORMAÇÕES -->
+
                     <div class="loja-info">
 
                         <h2>
                             {{ loja.nome_loja }}
                         </h2>
+
 
                         {% if loja.descricao_loja %}
 
@@ -83,11 +511,13 @@ Lojas - Cinnamonroll
 
                         {% endif %}
 
+
                         <span class="ver-loja">
                             Ver loja →
                         </span>
 
                     </div>
+
 
                 </a>
 
@@ -97,6 +527,9 @@ Lojas - Cinnamonroll
 
 
     {% else %}
+
+
+        <!-- SEM LOJAS -->
 
         <div class="sem-lojas">
 
@@ -118,7 +551,9 @@ Lojas - Cinnamonroll
 
         </div>
 
+
     {% endif %}
+
 
 </div>
 
