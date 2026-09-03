@@ -1,0 +1,46 @@
+<a href="{% url 'detalhe_produto' produto.id %}" class="produto-card-link">
+
+    <div class="produto-card">
+
+        <div class="produto-imagem">
+
+            {% if produto.imagem %}
+                <img
+                    src="{{ produto.imagem.url }}"
+                    alt="{{ produto.nome }}"
+                >
+            {% else %}
+                <div class="produto-sem-imagem">
+                    🍰
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="produto-info">
+
+            <h3>
+                {{ produto.nome }}
+            </h3>
+
+            <p>
+                {{ produto.descricao }}
+            </p>
+
+            <div class="produto-detalhes">
+
+                <strong>
+                    R$ {{ produto.preco|floatformat:2 }}
+                </strong>
+
+                <span>
+                    Estoque: {{ produto.estoque }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</a>

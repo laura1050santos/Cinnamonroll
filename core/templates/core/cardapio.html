@@ -1,11 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'core/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+<link rel="stylesheet" href="{% static 'perfis.css' %}">
+{% endblock %}
+{% block content %}
+
+<h1>Cardápio</h1>
+<br>
+
+<div class="produtos-grid">
+
+    {% for produto in produtos %}
+
+        {% include 'core/componentes/card_produto.html' %}
+
+    {% empty %}
+
+        <p>Nenhum produto encontrado.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
