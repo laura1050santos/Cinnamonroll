@@ -1,0 +1,153 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Meus Pedidos - Cinnamonroll{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'pedidos.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="pedidos-container">
+
+    <div class="pedidos-header">
+        <div>
+            <span class="pedidos-badge">Cinnamonroll</span>
+            <h1>Meus Pedidos</h1>
+            <p>Acompanhe seus pedidos e veja seus produtos.</p>
+        </div>
+
+        <a href="{% url 'cardapio' %}" class="btn-cardapio">
+            Ver cardápio
+        </a>
+    </div>
+
+
+    {% if pedidos %}
+
+        <div class="pedidos-lista">
+
+            {% for pedido in pedidos %}
+
+                <div class="pedido-card">
+
+                    <div class="pedido-topo">
+
+                        <div class="pedido-identificacao">
+                            <span class="pedido-numero">
+                                Pedido #{{ pedido.id }}
+                            </span>
+
+                            <span class="pedido-data">
+                                {{ pedido.data|date:"d/m/Y H:i" }}
+                            </span>
+                        </div>
+
+
+                        <div class="pedido-status status-{{ pedido.status|lower }}">
+                            {% if pedido.status == "PENDENTE" %}
+                                🕐 Pendente
+                            {% elif pedido.status == "ACEITO" %}
+                                ✓ Aceito
+                            {% elif pedido.status == "PREPARANDO" %}
+                                👩‍🍳 Preparando
+                            {% elif pedido.status == "PRONTO" %}
+                                📦 Pronto
+                            {% elif pedido.status == "ENTREGUE" %}
+                                ✓ Entregue
+                            {% elif pedido.status == "CANCELADO" %}
+                                ✕ Cancelado
+                            {% else %}
+                                {{ pedido.status }}
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pedido-conteudo">
+
+                        {% for item in pedido.itens.all %}
+
+                            <div class="pedido-item">
+
+                                <div class="item-imagem">
+
+                                    {% if item.produto.imagem %}
+                                        <img
+                                            src="{{ item.produto.imagem.url }}"
+                                            alt="{{ item.produto.nome }}"
+                                        >
+                                    {% else %}
+                                        <span>🍰</span>
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="item-info">
+
+                                    <h3>{{ item.produto.nome }}</h3>
+
+                                    <span>
+                                        {{ item.quantidade }} unidade{{ item.quantidade|pluralize }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="item-preco">
+                                    R$ {{ item.preco|floatformat:2 }}
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="pedido-rodape">
+
+                        <span class="pedido-total-label">
+                            Total do pedido
+                        </span>
+
+                        <strong class="pedido-total">
+                            R$ {{ pedido.total|floatformat:2 }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="pedidos-vazio">
+
+            <div class="vazio-icone">
+                🛍️
+            </div>
+
+            <h2>Você ainda não fez nenhum pedido</h2>
+
+            <p>
+                Que tal dar uma olhada no nosso cardápio?
+            </p>
+
+            <a href="{% url 'cardapio' %}" class="btn-cardapio">
+                Ver cardápio
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

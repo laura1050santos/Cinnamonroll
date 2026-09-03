@@ -344,8 +344,85 @@ def remover_do_carrinho(request, id):
     return redirect('carrinho')
 
 @login_required
-def pedido(request, id):
-    return render(request, 'core/pedido.html')
+def pedido(request):
+    perfil = request.user.perfil
+
+    pedidos = Pedido.objects.filter(
+        cliente=perfil
+    ).prefetch_related(
+        'itens__produto'
+    ).order_by('-data')
+
+    for pedido in pedidos:
+        pedido.total = sum(
+            item.quantidade * item.preco
+            for item in pedido.itens.all()
+        )
+
+    return render(request, 'core/pedidos.html', {
+        'pedidos': pedidos
+    })
+
+@login_required
+def finalizar_pedido(request):
+    if request.method == "POST":
+        # 1. Recupera o perfil do cliente logado
+        perfil_cliente = request.user.perfil
+
+        # 2. Busca o carrinho associado a esse perfil
+        carrinho = Carrinho.objects.filter(cliente=perfil_cliente).first()
+
+        # 3. Valida se o carrinho existe e tem itens
+        if not carrinho or not carrinho.itens.exists():
+            messages.error(request, "Seu carrinho está vazio!")
+            return redirect("carrinho")
+
+        # 4. Cria o Pedido vinculado ao Perfil
+        pedido = Pedido.objects.create(
+            cliente=perfil_cliente,
+            status="PENDENTE"
+        )
+
+        # 5. Transfere cada ItemCarrinho para a tabela ItemPedido
+        for item_carrinho in carrinho.itens.all():
+            ItemPedido.objects.create(
+                pedido=pedido,
+                produto=item_carrinho.produto,
+                quantidade=item_carrinho.quantidade,
+                preco=item_carrinho.produto.preco  # Congela o preço atual do produto
+            )
+
+        # 6. Limpa todos os itens do carrinho após criar o pedido
+        carrinho.itens.all().delete()
+
+        messages.success(request, f"Pedido #{pedido.id} realizado com sucesso!")
+        return redirect("perfilCliente")  # Redireciona para a página do cliente
+
+    # Se a requisição não for POST, redireciona de volta ao carrinho
+    return redirect("carrinho")
+
+@login_required
+def pedidos_vendedor(request):
+    perfil = request.user.perfil
+
+    if perfil.tipo != "VENDEDOR":
+        return redirect('homepage')
+
+    pedidos = Pedido.objects.filter(
+        itens__produto__vendedor=perfil
+    ).distinct().prefetch_related(
+        'itens__produto'
+    ).order_by('-data')
+
+    for pedido in pedidos:
+        pedido.itens_vendedor = [
+            item for item in pedido.itens.all()
+            if item.produto and item.produto.vendedor == perfil
+        ]
+
+    return render(request, 'core/pedidos_vendedor.html', {
+        'pedidos': pedidos
+    })
 
 @login_required
 def adicionar_carrinho(request, id):

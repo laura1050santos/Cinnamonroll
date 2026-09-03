@@ -170,9 +170,13 @@
 
                 </div>
 
-                <button class="finalizar-btn" type="button">
-                    Finalizar pedido
-                </button>
+                <form action="{% url 'finalizar_pedido' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="finalizar-btn" type="submit">
+                        Finalizar pedido
+                    </button>
+                </form>
+
 
                 <a
                     href="{% url 'cardapio' %}"

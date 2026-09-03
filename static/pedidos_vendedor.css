@@ -1,0 +1,425 @@
+.pedidos-vendedor-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding-bottom: 50px;
+}
+
+/* =========================
+CABEÇALHO
+========================= */
+
+.pedidos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.pedidos-header-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pedidos-badge {
+    width: fit-content;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: #ffe2ec;
+    color: #c75b7d;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pedidos-header h1 {
+    margin: 0;
+    color: #d45d83;
+    font-size: 34px;
+}
+
+.pedidos-header p {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+}
+
+/* =========================
+BOTÃO VOLTAR
+========================= */
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border: 1px solid #f0b8ca;
+    border-radius: 12px;
+    background: #fff7fa;
+    color: #c75b7d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-voltar:hover {
+    background: #ffe5ee;
+    transform: translateY(-2px);
+}
+
+/* =========================
+LISTA
+========================= */
+
+.pedidos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* =========================
+CARD DO PEDIDO
+========================= */
+
+.pedido-card {
+    background: #ffffff;
+    border: 1px solid #f3d4df;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(180, 100, 130, 0.08);
+}
+
+/* =========================
+TOPO
+========================= */
+
+.pedido-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #f3e1e7;
+}
+
+.pedido-identificacao h2 {
+    margin: 0 0 5px;
+    color: #444;
+    font-size: 21px;
+}
+
+.pedido-data {
+    color: #999;
+    font-size: 13px;
+}
+
+/* =========================
+STATUS
+========================= */
+
+.status {
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-pendente {
+    background: #fff4cf;
+    color: #a57b00;
+}
+
+.status-aceito {
+    background: #e5f0ff;
+    color: #4c78b8;
+}
+
+.status-recusado {
+    background: #ffe4e4;
+    color: #c65353;
+}
+
+.status-entregue {
+    background: #e3f7e9;
+    color: #4d9563;
+}
+
+/* =========================
+CLIENTE
+========================= */
+
+.pedido-cliente {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 13px 15px;
+    border-radius: 12px;
+    background: #fff8fa;
+}
+
+.cliente-icone {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffe0eb;
+    font-size: 18px;
+}
+
+.cliente-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cliente-info span {
+    color: #999;
+    font-size: 12px;
+}
+
+.cliente-info strong {
+    color: #555;
+    font-size: 14px;
+}
+
+/* =========================
+PRODUTOS
+========================= */
+
+.pedido-produtos {
+    margin-top: 10px;
+}
+
+.produtos-titulo h3 {
+    margin: 0 0 15px;
+    color: #555;
+    font-size: 16px;
+}
+
+.produto-pedido {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5e7ec;
+}
+
+.produto-pedido:last-child {
+    border-bottom: none;
+}
+
+/* IMAGEM */
+
+.produto-imagem {
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff0f5;
+    font-size: 25px;
+}
+
+.produto-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* INFORMAÇÕES */
+
+.produto-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.produto-info strong {
+    color: #444;
+    font-size: 15px;
+}
+
+.produto-info span {
+    color: #999;
+    font-size: 13px;
+}
+
+/* PREÇOS */
+
+.produto-precos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.preco-unitario {
+    color: #999;
+    font-size: 12px;
+}
+
+.preco-subtotal {
+    color: #d45d83;
+    font-size: 15px;
+}
+
+/* =========================
+RODAPÉ
+========================= */
+
+.pedido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f3e1e7;
+}
+
+.pedido-total {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pedido-total span {
+    color: #999;
+    font-size: 12px;
+}
+
+.pedido-total strong {
+    color: #d45d83;
+    font-size: 23px;
+}
+
+/* =========================
+BOTÕES
+========================= */
+
+.pedido-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.pedido-acoes button {
+    padding: 10px 17px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-recusar {
+    border: 1px solid #efb5b5;
+    background: #fff6f6;
+    color: #c65353;
+}
+
+.btn-recusar:hover {
+    background: #ffe5e5;
+}
+
+.btn-aceitar {
+    border: none;
+    background: #e88aa8;
+    color: white;
+}
+
+.btn-aceitar:hover {
+    background: #d96f91;
+}
+
+/* =========================
+ESTADO VAZIO
+========================= */
+
+.pedidos-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 25px;
+    text-align: center;
+    border: 1px dashed #efbfd0;
+    border-radius: 20px;
+    background: #fffafd;
+}
+
+.vazio-icone {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    background: #ffe5ee;
+    font-size: 30px;
+}
+
+.pedidos-vazio h2 {
+    margin: 0 0 8px;
+    color: #555;
+}
+
+.pedidos-vazio p {
+    max-width: 450px;
+    margin: 0 0 22px;
+    color: #999;
+    line-height: 1.5;
+}
+
+/* =========================
+RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+    .pedidos-vendedor-container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .pedidos-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pedidos-header h1 {
+        font-size: 28px;
+    }
+
+    .pedido-topo {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .produto-pedido {
+        align-items: flex-start;
+    }
+
+    .produto-precos {
+        align-items: flex-end;
+    }
+
+    .pedido-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pedido-acoes {
+        width: 100%;
+    }
+
+    .pedido-acoes button {
+        flex: 1;
+    }
+}

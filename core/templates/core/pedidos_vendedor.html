@@ -1,0 +1,255 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Pedidos Recebidos - Cinnamonroll{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'pedidos_vendedor.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="pedidos-vendedor-container">
+
+<!-- CABEÇALHO -->
+<div class="pedidos-header">
+
+    <div class="pedidos-header-texto">
+        <span class="pedidos-badge">📦 Área do vendedor</span>
+
+        <h1>Pedidos Recebidos</h1>
+
+        <p>
+            Confira os pedidos que possuem produtos da sua loja.
+        </p>
+    </div>
+
+    <a href="{% url 'perfilVendedor' %}" class="btn-voltar">
+        ← Minha loja
+    </a>
+
+</div>
+
+
+{% if pedidos %}
+
+    <!-- LISTA DE PEDIDOS -->
+    <div class="pedidos-lista">
+
+        {% for pedido in pedidos %}
+
+            <article class="pedido-card">
+
+                <!-- TOPO DO PEDIDO -->
+                <div class="pedido-topo">
+
+                    <div class="pedido-identificacao">
+
+                        <h2>
+                            Pedido #{{ pedido.id }}
+                        </h2>
+
+                        <span class="pedido-data">
+                            {{ pedido.data|date:"d/m/Y \à\s H:i" }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+                    {% if pedido.status == "PENDENTE" %}
+
+                        <span class="status status-pendente">
+                            🟡 Pendente
+                        </span>
+
+                    {% elif pedido.status == "ACEITO" %}
+
+                        <span class="status status-aceito">
+                            🔵 Aceito
+                        </span>
+
+                    {% elif pedido.status == "RECUSADO" %}
+
+                        <span class="status status-recusado">
+                            🔴 Recusado
+                        </span>
+
+                    {% elif pedido.status == "ENTREGUE" %}
+
+                        <span class="status status-entregue">
+                            🟢 Entregue
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- CLIENTE -->
+                <div class="pedido-cliente">
+
+                    <div class="cliente-icone">
+                        👤
+                    </div>
+
+                    <div class="cliente-info">
+
+                        <span>Pedido realizado por</span>
+
+                        <strong>
+                            {% if pedido.cliente.usuario.first_name %}
+                                {{ pedido.cliente.usuario.first_name }}
+                            {% else %}
+                                {{ pedido.cliente.usuario.username }}
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITENS -->
+                <div class="pedido-produtos">
+
+                    <div class="produtos-titulo">
+                        <h3>Produtos do pedido</h3>
+                    </div>
+
+
+                    {% for item in pedido.itens_vendedor %}
+
+                        <div class="produto-pedido">
+
+                            <!-- IMAGEM -->
+                            <div class="produto-imagem">
+
+                                {% if item.produto.imagem %}
+
+                                    <img
+                                        src="{{ item.produto.imagem.url }}"
+                                        alt="{{ item.produto.nome }}"
+                                    >
+
+                                {% else %}
+
+                                    <span>🍰</span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- INFORMAÇÕES -->
+                            <div class="produto-info">
+
+                                <strong>
+                                    {{ item.produto.nome }}
+                                </strong>
+
+                                <span>
+                                    {{ item.quantidade }}
+                                    unidade{{ item.quantidade|pluralize }}
+                                </span>
+
+                            </div>
+
+
+                            <!-- PREÇO -->
+                            <div class="produto-precos">
+
+                                <span class="preco-unitario">
+                                    R$ {{ item.preco|floatformat:2 }}
+                                    / unidade
+                                </span>
+
+                                <strong class="preco-subtotal">
+                                    R$ {{ item.subtotal|floatformat:2 }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- RODAPÉ -->
+                <div class="pedido-footer">
+
+                    <div class="pedido-total">
+
+                        <span>
+                            Total dos seus produtos
+                        </span>
+
+                        <strong>
+                            R$ {{ pedido.total_vendedor|floatformat:2 }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- AÇÕES — SOMENTE VISUAL POR ENQUANTO -->
+                    {% if pedido.status == "PENDENTE" %}
+
+                        <div class="pedido-acoes">
+
+                            <button
+                                type="button"
+                                class="btn-recusar"
+                            >
+                                Recusar
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn-aceitar"
+                            >
+                                Aceitar
+                            </button>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+
+{% else %}
+
+    <!-- ESTADO VAZIO -->
+    <div class="pedidos-vazio">
+
+        <div class="vazio-icone">
+            🛍️
+        </div>
+
+        <h2>Nenhum pedido recebido</h2>
+
+        <p>
+            Quando um cliente fizer um pedido com produtos
+            da sua loja, ele aparecerá aqui.
+        </p>
+
+        <a href="{% url 'perfilVendedor' %}" class="btn-voltar">
+            ← Voltar para minha loja
+        </a>
+
+    </div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

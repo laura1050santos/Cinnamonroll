@@ -1,0 +1,420 @@
+/* ========================================
+   PÁGINA DE PEDIDOS
+======================================== */
+
+.pedidos-container {
+    width: min(1000px, 90%);
+    margin: 50px auto 80px;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.pedidos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.pedidos-header h1 {
+    margin: 8px 0;
+
+    font-size: 36px;
+    color: #d45d83;
+}
+
+.pedidos-header p {
+    margin: 0;
+
+    color: #777;
+    font-size: 15px;
+}
+
+.pedidos-badge {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    background: #ffe0eb;
+    color: #d45d83;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   BOTÃO CARDÁPIO
+======================================== */
+
+.btn-cardapio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    background: #e88aa8;
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+.btn-cardapio:hover {
+    background: #d96f91;
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   LISTA DE PEDIDOS
+======================================== */
+
+.pedidos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.pedido-card {
+    background: white;
+
+    border: 1px solid #f1d5df;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(214, 117, 146, 0.08);
+
+    transition: box-shadow 0.2s ease,
+                transform 0.2s ease;
+}
+
+.pedido-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 20px rgba(214, 117, 146, 0.13);
+}
+
+
+/* ========================================
+   TOPO DO PEDIDO
+======================================== */
+
+.pedido-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 22px;
+
+    background: #fff7fa;
+
+    border-bottom: 1px solid #f4dce4;
+}
+
+.pedido-identificacao {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.pedido-numero {
+    color: #d45d83;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.pedido-data {
+    color: #999;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.pedido-status {
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Pendente */
+
+.status-pendente {
+    background: #fff0c7;
+    color: #a47722;
+}
+
+
+/* Aceito */
+
+.status-aceito {
+    background: #e5f5e8;
+    color: #4f8b5d;
+}
+
+
+/* Preparando */
+
+.status-preparando {
+    background: #e9e5ff;
+    color: #6c5bb5;
+}
+
+
+/* Pronto */
+
+.status-pronto {
+    background: #dff4f5;
+    color: #4c8588;
+}
+
+
+/* Entregue */
+
+.status-entregue {
+    background: #dff3e4;
+    color: #478254;
+}
+
+
+/* Cancelado */
+
+.status-cancelado {
+    background: #ffe1e5;
+    color: #b65364;
+}
+
+
+/* ========================================
+   ITENS
+======================================== */
+
+.pedido-conteudo {
+    padding: 8px 22px;
+}
+
+.pedido-item {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #f3e5e9;
+}
+
+.pedido-item:last-child {
+    border-bottom: none;
+}
+
+
+/* ========================================
+   IMAGEM DO ITEM
+======================================== */
+
+.item-imagem {
+    width: 65px;
+    height: 65px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background: #fff0f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-imagem img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.item-imagem span {
+    font-size: 28px;
+}
+
+
+/* ========================================
+   INFORMAÇÕES
+======================================== */
+
+.item-info {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.item-info h3 {
+    margin: 0;
+
+    color: #555;
+
+    font-size: 15px;
+}
+
+.item-info span {
+    color: #999;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   PREÇO
+======================================== */
+
+.item-preco {
+    color: #d45d83;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   RODAPÉ
+======================================== */
+
+.pedido-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 22px;
+
+    background: #fff9fb;
+
+    border-top: 1px solid #f4dce4;
+}
+
+.pedido-total-label {
+    color: #777;
+
+    font-size: 14px;
+}
+
+.pedido-total {
+    color: #d45d83;
+
+    font-size: 21px;
+}
+
+
+/* ========================================
+   NENHUM PEDIDO
+======================================== */
+
+.pedidos-vazio {
+    padding: 70px 30px;
+
+    text-align: center;
+
+    background: #fff8fa;
+
+    border: 1px dashed #edb9ca;
+    border-radius: 20px;
+}
+
+.vazio-icone {
+    margin-bottom: 15px;
+
+    font-size: 55px;
+}
+
+.pedidos-vazio h2 {
+    margin: 0 0 10px;
+
+    color: #d45d83;
+
+    font-size: 23px;
+}
+
+.pedidos-vazio p {
+    margin: 0 0 25px;
+
+    color: #888;
+}
+
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 650px) {
+
+    .pedidos-container {
+        width: 92%;
+        margin-top: 30px;
+    }
+
+    .pedidos-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pedidos-header h1 {
+        font-size: 30px;
+    }
+
+    .btn-cardapio {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pedido-topo {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .pedido-status {
+        align-self: flex-start;
+    }
+
+    .item-imagem {
+        width: 55px;
+        height: 55px;
+    }
+}

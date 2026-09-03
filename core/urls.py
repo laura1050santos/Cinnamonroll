@@ -74,7 +74,14 @@ urlpatterns = [
         name='remover_do_carrinho'
     ),
 
-    path('pedido/', pedido, name='pedido'),
+    path('pedidos/', pedido, name='pedido'),
+    path('finalizar-pedido/', views.finalizar_pedido, name='finalizar_pedido'),
+    
+    path(
+    'pedidos-vendedor/',
+    pedidos_vendedor,
+    name='pedidos_vendedor'
+    ),
 
     path('perfilVendedor/loja/editar/', views.editar_loja, name='editar_loja'),
 ]
