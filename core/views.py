@@ -201,6 +201,25 @@ def perfilCliente(request):
     })
 
 @login_required
+def editar_perfil(request):
+    perfil = request.user.perfil 
+    
+    if request.method == 'POST':
+        request.user.first_name = request.POST.get('first_name')
+        request.user.email = request.POST.get('email')
+        request.user.save()
+        
+        perfil.telefone = request.POST.get('telefone')
+        perfil.endereco = request.POST.get('endereco')
+        
+        if 'foto' in request.FILES:
+            perfil.foto = request.FILES['foto']
+            
+        perfil.save()
+        return redirect('perfil') 
+    return render(request, 'core/editarPerfilCliente.html', {'perfil': perfil})
+
+@login_required
 def excluir_perfil(request):
 
     if request.method == 'POST':

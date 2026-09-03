@@ -20,8 +20,10 @@ urlpatterns = [
 
     path('cadastro/', cadastro, name='cadastro'),
     path('cadastro-loja/', cadastro_loja, name='cadastro_loja'),
-    path('cadastro-produto/', cadastrar_produto, name='cadastro_produto'),    path('dashboard/', dashboard, name='dashboard'),
-    path('perfilCliente/', perfilCliente, name='perfilCliente'),
+    path('cadastro-produto/', cadastrar_produto, name='cadastro_produto'),    
+    path('dashboard/', dashboard, name='dashboard'),
+    path('perfilCliente/', views.editar_perfil, name='perfilCliente'),
+    path('perfil-cliente/editar/', views.editar_perfil, name='editar_perfil_cliente'), 
     path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
     path('excluir-perfil/',excluir_perfil, name='excluir_perfil'),

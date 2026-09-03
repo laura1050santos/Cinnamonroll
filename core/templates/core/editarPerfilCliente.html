@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'forms.css' %}">
+<link rel="stylesheet" href="{% static 'perfis.css' %}?v=2.1">
+{% endblock %}
+
+{% block content %}
+
+<div class="perfil-cliente">
+
+    <section class="cliente-secao">
+        <div class="secao-cabecalho">
+            <h2>Editar Perfil</h2>
+            <p>Atualize suas informações pessoais e foto de exibição</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="form-editar-perfil">
+            {% csrf_token %}
+
+            <!-- Foto de Perfil -->
+            <div class="campo-foto">
+                <div class="cliente-foto foto-preview">
+                    {% if perfil.foto %}
+                        <img src="{{ perfil.foto.url }}" alt="Foto do perfil">
+                    {% else %}
+                        <div class="cliente-foto-vazia"></div>
+                    {% endif %}
+                </div>
+                <div class="upload-btn-wrapper">
+                    <label for="id_foto" class="botao-editar">📷 Alterar foto</label>
+                    <input type="file" name="foto" id="id_foto" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Formulário de Dados -->
+            <div class="form-grid">
+                <div class="campo-grupo">
+                    <label for="first_name">Nome</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ perfil.usuario.first_name }}" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" value="{{ perfil.usuario.email }}" placeholder="seu.email@exemplo.com" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="text" id="telefone" name="telefone" value="{{ perfil.telefone|default:'' }}" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco" name="endereco" value="{{ perfil.endereco|default:'' }}" placeholder="Rua, número, bairro...">
+                </div>
+            </div>
+
+            <div class="form-acoes">
+                <a href="{% url 'perfilCliente' %}" class="botao-cancelar">Cancelar</a>
+                <button type="submit" class="botao-acao">Salvar Alterações</button>
+            </div>
+        </form>
+    </section>
+
+</div>
+
+{% endblock %}
