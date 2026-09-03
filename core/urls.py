@@ -40,7 +40,7 @@ urlpatterns = [
        # name='produto'
     #),
 
-    path('produto/<int:id>/', views.detalhe_produto, name='detalhe_produto'),
+    path('produto/<int:id>/', views.detalhe_produto, name='produto'),
 
     path(
         'carrinho/',
