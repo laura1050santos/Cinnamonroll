@@ -73,6 +73,13 @@
             </button>
 
         {% endif %}
+        
+        <p>
+        Vendido por:
+        <a href="{% url 'perfilVendedor' produto.vendedor.id %}">
+        {{ produto.vendedor.nome_loja }}
+        </a>
+        </p>
 
         <a href="{% url 'cardapio' %}" class="btn-voltar">
             ← Voltar para o cardápio

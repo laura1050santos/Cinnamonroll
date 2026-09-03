@@ -190,11 +190,12 @@ def excluir_perfil(request):
         return redirect('homepage')
 
 @login_required
-def perfilVendedor(request):
-    perfil = request.user.perfil
+def perfilVendedor(request, id=None):
 
-    if perfil.tipo != "VENDEDOR":
-        return redirect('homepage')
+    if id:
+        perfil = get_object_or_404(Perfil, id=id, tipo="VENDEDOR")
+    else:
+        perfil = request.user.perfil
 
     produtos = perfil.produtos.all()
 
@@ -202,7 +203,6 @@ def perfilVendedor(request):
         'perfil': perfil,
         'produtos': produtos
     })
-
 
 @login_required
 def perfilAdmin(request):

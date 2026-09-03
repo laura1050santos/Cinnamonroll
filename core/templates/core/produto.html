@@ -4,4 +4,10 @@
     <button type="submit">
         Adicionar ao carrinho
     </button>
+    <p>
+    Vendido por:
+    <a href="{% url 'perfilVendedor' produto.vendedor.id %}">
+        {{ produto.vendedor.nome_loja }}
+    </a>
+</p>
 </form>
