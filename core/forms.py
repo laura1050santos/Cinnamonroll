@@ -42,3 +42,4 @@ class PedidoForm(forms.ModelForm):
         fields = [
             'status'
         ]
+
