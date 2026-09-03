@@ -139,3 +139,38 @@
     }
 }
 
+/* ==========================================
+   BARRA DE BUSCA (SEARCH)
+   ========================================== */
+
+.form-busca .flex-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.form-busca input[type="text"] {
+    flex: 1;
+    margin: 0;
+}
+
+.form-busca .botao-acao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .form-busca .flex-row {
+        flex-direction: column;
+    }
+    
+    .form-busca .botao-acao {
+        width: 100%;
+        justify-content: center;
+    }
+}

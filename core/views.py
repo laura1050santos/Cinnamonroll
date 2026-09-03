@@ -13,7 +13,16 @@ def homepage(request):
     return render(request, 'core/homepage.html')
 
 def searchpage(request):
-    return render(request, 'core/searchpage.html')
+    query = request.GET.get('q', '').strip()
+    produtos = []
+
+    if query:
+        produtos = Produto.objects.filter(nome__icontains=query)
+
+    return render(request, 'core/searchpage.html', {
+        'produtos': produtos,
+        'query': query
+    })
 
 def cadastro(request):
     if request.method == 'POST':

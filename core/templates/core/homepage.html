@@ -5,10 +5,19 @@
 {% load static %}
 {% block content %}
 <!-- Barra de Busca -->
-<div class="search-box">
-    <input type="text" placeholder="Buscar docerias, bolos ou confeiteiras...">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-</div>
+<form method="GET" action="{% url 'searchpage' %}">
+    <div class="search-box">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Buscar docerias, bolos ou confeiteiras..."
+            required
+        >
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</form>
 
 <!-- Banner Principal de Boas-Vindas -->
 <section class="hero-section">
