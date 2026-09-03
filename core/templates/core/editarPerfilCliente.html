@@ -17,7 +17,6 @@
         </div>
 
         <form method="POST" enctype="multipart/form-data" class="form-editar-perfil">
-            {% csrf_token %}
 
             <!-- Foto de Perfil -->
             <div class="campo-foto">
@@ -36,6 +35,8 @@
 
             <!-- Formulário de Dados -->
             <div class="form-grid">
+                {% csrf_token %}
+
                 <div class="campo-grupo">
                     <label for="first_name">Nome</label>
                     <input type="text" id="first_name" name="first_name" value="{{ perfil.usuario.first_name }}" placeholder="Seu nome completo" required>

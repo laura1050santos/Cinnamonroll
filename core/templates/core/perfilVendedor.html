@@ -10,6 +10,16 @@
 
 <div class="perfil-vendedor">
 
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mensagem {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
     <!-- CABEÇALHO DA LOJA -->
     <section class="loja-cabecalho">
 
@@ -24,6 +34,7 @@
             {% endif %}
 
         </div>
+
 
         <div class="loja-informacoes">
 
@@ -68,7 +79,7 @@
             </div>
 
             <a href="{% url 'editar_loja' %}" class="botao-editar">
-                ✏️ Editar loja
+                Editar loja
             </a>
 
         </div>

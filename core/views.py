@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
@@ -56,6 +56,13 @@ def cadastro(request):
             tipo=tipo
         )
 
+        perfil.save()
+        usuario.save()
+        messages.success(
+                    request,
+                    'Cadastro realizado com sucesso!'
+                )
+
         # Faz login automaticamente
         login(request, usuario)
 
@@ -63,8 +70,9 @@ def cadastro(request):
         if tipo == 'VENDEDOR':
             return redirect('cadastro_loja')
 
-        # Se for cliente, vai para a homepage
-        return redirect('homepage')
+
+        # Se for cliente, vai para a perfilCliente
+        return redirect('perfilCliente')
 
     return render(request, 'core/cadastro.html')
 
@@ -78,6 +86,27 @@ def cadastro_loja(request):
     if perfil.tipo != 'VENDEDOR':
         return redirect('homepage')
 
+    if request.method == 'POST':
+
+        perfil.nome_loja = request.POST.get('nome_loja')
+        perfil.descricao_loja = request.POST.get('descricao_loja')
+        perfil.telefone = request.POST.get('telefone')
+        perfil.endereco = request.POST.get('endereco')
+        
+
+        # Salva a foto, caso tenha sido enviada
+        if 'foto' in request.FILES:
+            perfil.foto = request.FILES['foto']
+
+        # Salva TODAS as alterações no banco
+        perfil.save()
+
+        messages.success(
+            request,
+            'Cadastro realizado com sucesso!'
+        )
+
+        return redirect('perfilVendedor')
     return render(request, 'core/cadastro_loja.html')
 
 def editar_produto(request,id):
@@ -131,21 +160,21 @@ def perfilCliente(request):
 
 @login_required
 def editar_perfil(request):
-    perfil = request.user.perfil 
+    perfil = request.user.perfil
+    usuario = request.user
     
     if request.method == 'POST':
-        request.user.first_name = request.POST.get('first_name')
-        request.user.email = request.POST.get('email')
-        request.user.save()
-        
+        usuario.first_name = request.POST.get('first_name') # ESTE TBM N ESTÁ POIS APARECE O PRIMEIOR NOME APENAS
+        usuario.email = request.POST.get('email') # EMAIL NÂO ALTERA TBM POR ALGUMA RAzão
         perfil.telefone = request.POST.get('telefone')
         perfil.endereco = request.POST.get('endereco')
-        
         if 'foto' in request.FILES:
             perfil.foto = request.FILES['foto']
             
         perfil.save()
-        return redirect('perfil') 
+        usuario.save()
+
+        return redirect('perfilCliente') 
     return render(request, 'core/editarPerfilCliente.html', {'perfil': perfil})
 
 @login_required
@@ -367,6 +396,22 @@ def cadastro_produto(request):
     
     return render(request, 'core/cadastro_produto.html')
 
+@login_required
+def editar_loja(request):
+    perfil = request.user.perfil
+        
+    if request.method == 'POST':
+        perfil.nome_loja = request.POST.get('nome_loja') 
+        perfil.descricao_loja = request.POST.get('descricao_loja')
+        perfil.telefone = request.POST.get('telefone')
+        perfil.endereco = request.POST.get('endereco')
+        if 'foto' in request.FILES:
+            perfil.foto = request.FILES['foto']
+            
+        perfil.save()
+        return redirect('perfilVendedor')
+
+    return render(request, 'core/editarloja.html', {'perfil': perfil})
 
 def sair(request):
     logout(request)

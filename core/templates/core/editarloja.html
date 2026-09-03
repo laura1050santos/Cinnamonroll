@@ -11,7 +11,7 @@
     <div class="form-card">
         <div class="form-header">
             <span class="form-badge">Configurações</span>
-            <h2>Editar Minha Loja 🏪</h2>
+            <h2>Editar Minha Loja</h2>
             <p>Atualize a foto, dados de contato e a apresentação do seu negócio.</p>
         </div>
 
@@ -62,7 +62,8 @@
 
             <div class="form-acoes">
                 <a href="{% url 'perfilVendedor' %}" class="btn-cancelar">Voltar</a>
-<a href="{% url 'perfilVendedor' %}" class="btn-salvar">Voltar ao Perfil ✨</a>            </div>
+                <button href="{% url 'perfilVendedor' %}" class="btn-salvar" type="submit">Salvar</button> 
+            </div>
         </form>
     </div>
 

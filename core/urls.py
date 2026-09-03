@@ -20,15 +20,16 @@ urlpatterns = [
 
     path('cadastro/', cadastro, name='cadastro'),
     path('cadastro-loja/', cadastro_loja, name='cadastro_loja'),
-    path('cadastro-produto/', cadastrar_produto, name='cadastro_produto'),    
+    path('cadastro-produto/', cadastro_produto, name='cadastro_produto'),    
     path('dashboard/', dashboard, name='dashboard'),
-    path('perfilCliente/', views.editar_perfil, name='perfilCliente'),
-    path('perfil-cliente/editar/', views.editar_perfil, name='editar_perfil_cliente'), 
+    path('perfilCliente/', perfilCliente, name='perfilCliente'),
+    path('perfilCliente/editar/', views.editar_perfil, name='editar_perfil_cliente'), 
     path('perfilVendedor/', perfilVendedor, name='perfilVendedor'),
+    path('perfilVendedor/editar', views.editar_perfil, name='editar_perfilVendedor'),
     path('perfilAdmin/', perfilAdmin, name='perfilAdmin'),
     path('excluir-perfil/',excluir_perfil, name='excluir_perfil'),
     path('searchpage/', searchpage, name='searchpage'),
-    path('buscar/', buscar, name='buscar'),
+    #path('buscar/', buscar, name='buscar'),
 
 
     path('cardapio/', cardapio, name='cardapio'),
@@ -71,5 +72,5 @@ urlpatterns = [
 
     path('pedido/', pedido, name='pedido'),
 
-    path('vendedor/loja/editar/', views.editar_loja, name='editar_loja'),
+    path('perfilVendedor/loja/editar/', views.editar_loja, name='editar_loja'),
 ]

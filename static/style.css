@@ -68,6 +68,26 @@ header {
     cursor: pointer;
 }
 
+
+.mensagem {
+    padding: 36px;
+    margin: 20px 0;
+    border-radius: 8px;
+    
+    background: var(--card-bg);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+}
+
+.mensagem.success {
+    background-color: #d4edda;
+    color: #208a39;
+}
+
 .user-actions {
     display: flex;
     gap: 12px;
