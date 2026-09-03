@@ -446,22 +446,31 @@ def finalizar_pedido(request):
 
 @login_required
 def pedidos_vendedor(request):
-    perfil = request.user.perfil
 
-    if perfil.tipo != "VENDEDOR":
-        return redirect('homepage')
+    vendedor = request.user.perfil
 
     pedidos = Pedido.objects.filter(
-        itens__produto__vendedor=perfil
+        itens__produto__vendedor=vendedor
     ).distinct().prefetch_related(
-        'itens__produto'
-    ).order_by('-data')
+        "itens__produto"
+    ).select_related(
+        "cliente__usuario"
+    )
 
     for pedido in pedidos:
+
+        # Seleciona apenas os itens daquele vendedor
         pedido.itens_vendedor = [
             item for item in pedido.itens.all()
-            if item.produto and item.produto.vendedor == perfil
+            if item.produto and item.produto.vendedor == vendedor
         ]
+
+        # Calcula o total dos produtos desse vendedor
+        pedido.total_vendedor = sum(
+            item.subtotal
+            for item in pedido.itens_vendedor
+        )
+
 
     return render(request, 'core/pedidos_vendedor.html', {
         'pedidos': pedidos

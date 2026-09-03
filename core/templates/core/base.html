@@ -111,6 +111,13 @@
                         <i class="fa-solid fa-store"></i>
                         Minha loja
                     </a>
+                    <a
+                    href="{% url 'pedidos_vendedor' %}"
+                    class="btn-action"
+                    title="Pedidos"
+                >  <i class="fa-solid fa-store"></i>
+                    Pedidos
+                </a>
 
 
                 {% elif user.perfil.tipo == "ADMINISTRADOR" %}
