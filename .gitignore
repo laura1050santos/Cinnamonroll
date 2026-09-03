@@ -15,3 +15,7 @@ config/__pycache__/settings.cpython-313.pyc
 config/__pycache__/__init__.cpython-313.pyc
 *.pyc
 /venv
+venv/
+__pycache__/
+db.sqlite3
+.env
