@@ -116,12 +116,13 @@
 
             <div class="produtos-grid">
 
-                <div class="produtos-grid">
 
                     {% for produto in produtos %}
+                    <div class="produtos-grid">
 
                         {% include 'core/componentes/card_produto.html' %}
-                    
+                        {% if user.is_authenticated and perfil.tipo == "VENDEDOR" and user == perfil.usuario %}
+
                         <a href="{% url 'excluir_produto' produto.id %}" class="botao-adicionar">
                             Excluir
                         </a>
@@ -129,10 +130,11 @@
                         <a href="{% url 'editar_produto' produto.id %}" class="botao-adicionar">
                             Editar
                         </a>
+                        {% endif %}
+                    </div>
 
                     {% endfor %}
 
-                </div>
 
             </div>
 
